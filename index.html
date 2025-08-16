@@ -18,15 +18,15 @@
         body::before { content: ''; position: fixed; top: 0; left: 50%; width: 150%; height: 150%; background: radial-gradient(circle at 20% 20%, var(--aurora-1), transparent 30%), radial-gradient(circle at 80% 70%, var(--aurora-2), transparent 30%); transform: translate(-50%, -50%); filter: blur(150px) saturate(1.5); opacity: 0.2; animation: background-pan 25s infinite alternate ease-in-out; will-change: transform; z-index: 0; }
         @keyframes background-pan { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
         .main-container { width: 100%; max-width: 1100px; background: var(--card-color); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border-radius: var(--border-radius-lg); border: 1px solid var(--border-color); box-shadow: 0 16px 40px -12px var(--shadow-color); padding: 2.5rem 3rem; z-index: 1; }
-        header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem; }
-        .header-left { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+        /* FIX: Header structure for mobile */
+        header { display: flex; flex-direction: column; padding-bottom: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); }
+        .header-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .header-bottom { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 1.5rem; }
         .app-logo { font-family: var(--font-family-heading); font-size: 1.75rem; font-weight: 700; color: var(--accent-color); }
         nav { display: flex; gap: 1.5rem; }
         nav a { position: relative; text-decoration: none; color: var(--subtle-text-color); font-weight: 500; font-size: 0.95rem; transition: color var(--transition-fast) ease; padding: 4px 8px; border-radius: 8px; }
         nav a:hover { color: var(--text-color); background-color: color-mix(in srgb, var(--accent-color) 10%, transparent); }
         nav a.active { color: var(--text-color-heading); font-weight: 600; }
-        nav a.active::after { content: ''; position: absolute; bottom: -24px; left: 0; width: 100%; height: 2px; background-color: var(--accent-color); }
-        .header-right { display: flex; align-items: center; gap: 1.5rem; }
         .theme-switcher { position: relative; display: flex; align-items: center; background: var(--input-bg); padding: 5px; border-radius: 25px; border: 1px solid var(--border-color); cursor: pointer; }
         .theme-switcher .icon { z-index: 2; width: 24px; height: 24px; padding: 3px; color: var(--subtle-text-color); }
         .theme-switcher .switcher-pill { position: absolute; top: 5px; left: 5px; width: 24px; height: 24px; background-color: var(--card-color); border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: transform var(--transition-medium) var(--ease-out-quart); z-index: 1; }
@@ -57,19 +57,24 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
         /* Dashboard Styles */
+        /* FIX: Add Goal button to Icon */
+        #add-goal-btn { width: 44px; height: 44px; padding: 0; font-size: 1.5rem; line-height: 44px; text-align: center; }
         .goals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-        .goal-card { position: relative; background-color: var(--card-color); border-radius: var(--border-radius-md); padding: 1.75rem; border: 1px solid var(--border-color); transition: all 0.3s var(--ease-out-quart); cursor: pointer; }
+        .goal-card { position: relative; background-color: var(--card-color); border-radius: var(--border-radius-md); padding: 1.75rem; border: 1px solid var(--border-color); transition: all 0.3s var(--ease-out-quart); }
         .goal-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 25px var(--shadow-color); border-color: var(--accent-color); }
         .card-actions { position: absolute; top: 10px; right: 10px; display: flex; gap: 4px; opacity: 0; transform: translateY(5px); transition: all var(--transition-fast) ease; }
         .goal-card:hover .card-actions { opacity: 1; transform: translateY(0); }
         .card-action-btn { background: var(--input-bg); border: 1px solid var(--border-color); color: var(--subtle-text-color); font-size: 1.2rem; cursor: pointer; width: 30px; height: 30px; border-radius: 50%; transition: all var(--transition-fast); }
         .card-action-btn:hover { color: var(--text-color); transform: scale(1.1); }
-        .goal-card h3 { font-family: var(--font-family-heading); font-size: 1.25rem; margin-bottom: 1.5rem; }
-        .progress-bar-container { width: 100%; height: 10px; background-color: var(--slider-track); border-radius: 5px; overflow: hidden; margin-bottom: 1rem; }
+        .goal-card h3 { font-family: var(--font-family-heading); font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .progress-bar-container { width: 100%; height: 10px; background-color: var(--slider-track); border-radius: 5px; overflow: hidden; margin: 1rem 0; }
         .progress-bar { height: 100%; width: var(--progress, 0%); background: var(--accent-color); border-radius: 5px; transition: width 0.8s var(--ease-out-quart); }
         #history-modal-body { max-height: 400px; overflow-y: auto; }
         .transaction-item { display: grid; grid-template-columns: 1fr auto; padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); }
         .transaction-amount.positive { color: var(--success-color); }
+        /* FIX: Manual Add Funds */
+        .goal-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+        .add-funds-btn { font-size: 0.8rem; padding: 0.3rem 0.8rem; background-color: var(--strategy-btn-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); cursor: pointer; }
 
         /* Workshop & Splitter Styles */
         .tool-container { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; }
@@ -79,8 +84,8 @@
         .input-group { margin-bottom: 1.75rem; }
         .input-group label { display: block; margin-bottom: 0.75rem; color: var(--subtle-text-color); font-weight: 500; }
         .input-wrapper { position: relative; }
-        .input-wrapper span { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); pointer-events: none; }
-        .input-group input { width: 100%; padding: 0.9rem 1rem 0.9rem 2.5rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background-color: var(--input-bg); color: var(--text-color); font-size: 1.25rem; font-weight: 600; }
+        .input-wrapper span { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 1.25rem; font-weight: 600; }
+        .input-group input { width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background-color: var(--input-bg); color: var(--text-color); font-size: 1.25rem; font-weight: 600; }
         .strategy-selector { display: flex; flex-wrap: wrap; gap: 0.75rem; }
         .strategy-btn { background-color: var(--strategy-btn-bg); border: 1px solid var(--border-color); padding: 0.6rem 1.1rem; border-radius: var(--border-radius-sm); cursor: pointer; transition: all var(--transition-fast) ease; color: var(--subtle-text-color); font-weight: 500;}
         .strategy-btn:hover { border-color: var(--accent-color); color: var(--text-color); }
@@ -90,9 +95,10 @@
         .slider:hover::-webkit-slider-thumb { transform: scale(1.1); }
         
         /* Workshop Specific */
+        /* FIX: Add margin to apply button container */
+        .apply-btn-container { margin-top: 2rem; }
         .goal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; }
         .goal-label { display: flex; align-items: center; gap: 8px; font-weight: 500; }
-        /* FIX: Added transition for smoother value updates */
         .goal-value { font-weight: 600; color: var(--accent-color); background-color: color-mix(in srgb, var(--accent-color) 15%, transparent); padding: 0.2rem 0.6rem; border-radius: 8px; transition: color var(--transition-fast) ease, background-color var(--transition-fast) ease; }
         .info-dot { width: 16px; height: 16px; display: grid; place-items: center; cursor: help; position: relative; }
         .info-dot::before { content: ''; width: 6px; height: 6px; background-color: var(--accent-color); opacity: 0.6; border-radius: 50%; }
@@ -113,21 +119,18 @@
         #allocation-total.complete { color: var(--success-color); }
         .slider-row { display: grid; grid-template-columns: 160px 1fr 60px; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
         .slider-percent { font-weight: 600; text-align: right; }
-        /* FIX: Made insight card less prominent */
         .insight-card { background: color-mix(in srgb, var(--input-bg) 30%, transparent); border-radius: var(--border-radius-sm); padding: 1rem; margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.9; }
         .insight-card p { line-height: 1.6; }
+        /* FIX: Add margin to p tags inside insight card for spacing */
+        .insight-card p + p { margin-top: 1rem; }
         .summary-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.6rem 0; border-bottom: 1px solid var(--border-color);}
         .summary-section { padding-bottom: 1rem; }
         .summary-row:last-child { border-bottom: none; }
-        /* FIX: Made money summary more prominent */
         .summary-value { font-size: 1.5rem; font-weight: 700; color: var(--accent-color); }
 
-        /* FIX: MOBILE RESPONSIVENESS */
         @media (max-width: 900px) {
-            .header-left { gap: 1rem; }
             nav a.active::after { bottom: -16px; }
         }
-
         @media (max-width: 768px) {
             body { padding: 1rem; }
             .main-container { padding: 1.5rem; }
@@ -139,13 +142,17 @@
             .goals-grid {
                 grid-template-columns: 1fr;
             }
-            .header-left { flex-direction: column; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
-            header { justify-content: space-between; }
-            nav a.active::after { display: none; } /* Hide line on mobile */
+        }
+        @media (max-width: 600px) {
+             /* FIX: Mobile header layout */
+            header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .header-top, .header-bottom { width: 100%; }
+            .header-bottom { margin-top: 0; }
+            nav { flex-grow: 1; }
         }
         @media (max-width: 480px) {
             body { padding: 0.5rem; }
-            .main-container { padding: 1rem; border-radius: 0; }
+            .main-container { padding: 1rem; border-radius: var(--border-radius-sm); }
             .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
             .app-logo { font-size: 1.5rem; }
         }
@@ -155,24 +162,24 @@
 
     <div class="main-container">
         <header>
-            <div class="header-left">
+            <div class="header-top">
                 <div class="app-logo">The Financial Sculptor</div>
-                <nav>
+                <div class="theme-switcher" id="theme-toggle"><div class="switcher-pill"></div><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg></div>
+            </div>
+            <div class="header-bottom">
+                 <nav>
                     <a href="#dashboard" class="nav-link active">Dashboard</a>
                     <a href="#workshop" class="nav-link">Workshop</a>
                     <a href="#splitter" class="nav-link">Splitter</a>
                 </nav>
-            </div>
-            <div class="header-right">
-                <div class="currency-selector"><select id="currency-picker"><option value="GBP">£ GBP</option><option value="USD">$ USD</option><option value="EUR">€ EUR</option></select></div>
-                <div class="theme-switcher" id="theme-toggle"><div class="switcher-pill"></div><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg></div>
+                 <div class="currency-selector"><select id="currency-picker"><option value="GBP">£ GBP</option><option value="USD">$ USD</option><option value="EUR">€ EUR</option></select></div>
             </div>
         </header>
 
         <main>
             <!-- Dashboard Page -->
             <section id="dashboard" class="page-section active">
-                <div class="page-header"><h1>Goal Dashboard</h1><button class="btn-primary" id="add-goal-btn">Add Goal</button></div>
+                <div class="page-header"><h1>Goal Dashboard</h1><button class="btn-primary" id="add-goal-btn">+</button></div>
                 <div class="goals-grid" id="goals-grid-container"></div>
             </section>
 
@@ -181,7 +188,7 @@
                 <div class="tool-container">
                     <div class="left-panel">
                         <h2>Allocation Workshop</h2>
-                        <div class="input-group"><label for="total-income">Total Lump Sum</label><div class="input-wrapper"><span>£</span><input type="number" id="total-income" value="30000" min="0"></div></div>
+                        <div class="input-group"><label for="total-income">Total Sum</label><div class="input-wrapper"><span id="workshop-currency-symbol">£</span><input type="number" id="total-income" value="30000" min="0"></div></div>
                         <div class="input-group"><label>Choose a Strategy</label><div id="workshop-strategy-selector" class="strategy-selector"></div></div>
                         <div id="workshop-goals-container" style="display: flex; flex-direction: column; gap: 1.5rem;"></div>
                     </div>
@@ -189,7 +196,7 @@
                         <h2>Visual Overview</h2>
                         <div id="chart-total-display"><div id="chart-total-value">0%</div><div>Allocated</div></div>
                         <div id="bar-chart-container"></div>
-                        <div class="apply-btn-container" style="margin-top: auto; text-align: right;"><button class="btn-primary" id="apply-funds-btn">Apply Funds to Goals</button></div>
+                        <div class="apply-btn-container" style="text-align: right;"><button class="btn-primary" id="apply-funds-btn">Apply Funds to Goals</button></div>
                     </div>
                 </div>
             </section>
@@ -198,7 +205,7 @@
             <section id="splitter" class="page-section">
                  <div class="splitter-container">
                     <h1>Profit & Bonus Splitter</h1>
-                    <div class="input-group"><label for="profit-amount">Amount to Split</label><div class="input-wrapper"><span>£</span><input type="number" id="profit-amount" value="10000" min="0"></div></div>
+                    <div class="input-group"><label for="profit-amount">Amount to Split</label><div class="input-wrapper"><span id="splitter-currency-symbol">£</span><input type="number" id="profit-amount" value="10000" min="0"></div></div>
                     <div class="input-group"><label>Choose a Strategy</label><div id="splitter-strategy-selector" class="strategy-selector"></div></div>
                     <div id="splitter-allocation-container"></div>
                 </div>
@@ -222,29 +229,16 @@ document.addEventListener('DOMContentLoaded', () => {
             currentPage: 'dashboard',
             currency: 'GBP',
             goals: [],
-            workshop: {
-                totalIncome: 30000,
-                activeStrategy: 'balanced',
-                allocations: [
-                    { id: 'essentialLiving', name: 'Life Essentials', percent: 0, color: 'linear-gradient(90deg, #6C63FF, #8179ff)', info: "Covers your core survival needs: emergency funds, housing, and essential bills." },
-                    { id: 'financialSecurity', name: 'Security Foundation', percent: 0, color: 'linear-gradient(90deg, #00C9B1, #00DDC3)', info: "Builds your safety net through savings and stable, low-risk investments." },
-                    { id: 'personalGrowth', name: 'Personal Growth', percent: 0, color: 'linear-gradient(90deg, #FFD166, #FFE399)', info: "Invest in yourself: education, new skills, health, and wellness to increase your future potential." },
-                    { id: 'wealthBuilding', name: 'Wealth Engine', percent: 0, color: 'linear-gradient(90deg, #FF6B6B, #FF8888)', info: "Your engine for long-term wealth: stocks, retirement funds, and other growth assets." },
-                    { id: 'relationshipsSocialCapital', name: 'Social Capital', percent: 0, color: 'linear-gradient(90deg, #4ECDC4, #6AF2E9)', info: "Invest in your network: building relationships, networking, and experiences." },
-                    { id: 'communitySocialResponsibility', name: 'Community Impact', percent: 0, color: 'linear-gradient(90deg, #9A63B5, #B488D1)', info: "Give back to causes you care about through charity or local investments." }
-                ]
-            },
-            splitter: {
-                profit: 10000,
-                activeStrategy: 'conservative',
-                customModel: { cash: 60, assets: 25, investments: 15 }
-            }
+            workshop: { totalIncome: 30000, activeStrategy: 'balanced', allocations: [ { id: 'essentialLiving', name: 'Life Essentials', percent: 0, color: 'linear-gradient(90deg, #6C63FF, #8179ff)', info: "Covers your core survival needs: emergency funds, housing, and essential bills." }, { id: 'financialSecurity', name: 'Security Foundation', percent: 0, color: 'linear-gradient(90deg, #00C9B1, #00DDC3)', info: "Builds your safety net through savings and stable, low-risk investments." }, { id: 'personalGrowth', name: 'Personal Growth', percent: 0, color: 'linear-gradient(90deg, #FFD166, #FFE399)', info: "Invest in yourself: education, new skills, health, and wellness to increase your future potential." }, { id: 'wealthBuilding', name: 'Wealth Engine', percent: 0, color: 'linear-gradient(90deg, #FF6B6B, #FF8888)', info: "Your engine for long-term wealth: stocks, retirement funds, and other growth assets." }, { id: 'relationshipsSocialCapital', name: 'Social Capital', percent: 0, color: 'linear-gradient(90deg, #4ECDC4, #6AF2E9)', info: "Invest in your network: building relationships, networking, and experiences." }, { id: 'communitySocialResponsibility', name: 'Community Impact', percent: 0, color: 'linear-gradient(90deg, #9A63B5, #B488D1)', info: "Give back to causes you care about through charity or local investments." } ] },
+            splitter: { profit: 10000, activeStrategy: 'conservative', customModel: { cash: 60, assets: 25, investments: 15 } }
         },
 
         // --- Config ---
         config: {
             GOALS_STORAGE_KEY: 'financialSculptor.goals',
             PENDING_ALLOCATION_KEY: 'financialSculptor.pendingAllocations',
+            MAX_FREE_GOALS: 3,
+            CURRENCY_SYMBOLS: { GBP: '£', USD: '$', EUR: '€' },
             WorkshopStrategies: {
                 balanced: { name: 'Balanced', allocations: { essentialLiving: 26, financialSecurity: 25, personalGrowth: 10, wealthBuilding: 20, relationshipsSocialCapital: 15, communitySocialResponsibility: 4 }},
                 growth: { name: 'Growth', allocations: { essentialLiving: 15, financialSecurity: 35, personalGrowth: 5, wealthBuilding: 40, relationshipsSocialCapital: 3, communitySocialResponsibility: 2 }},
@@ -274,6 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resetDataBtn: document.getElementById('reset-data-btn'),
             // Workshop
             totalIncomeInput: document.getElementById('total-income'),
+            workshopCurrencySymbol: document.getElementById('workshop-currency-symbol'),
             workshopStrategySelector: document.getElementById('workshop-strategy-selector'),
             workshopGoalsContainer: document.getElementById('workshop-goals-container'),
             chartTotalValue: document.getElementById('chart-total-value'),
@@ -282,6 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mappingModal: document.getElementById('mapping-modal'),
             // Splitter
             profitInput: document.getElementById('profit-amount'),
+            splitterCurrencySymbol: document.getElementById('splitter-currency-symbol'),
             splitterStrategySelector: document.getElementById('splitter-strategy-selector'),
             splitterAllocationContainer: document.getElementById('splitter-allocation-container'),
         },
@@ -290,54 +286,42 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // --- Core App ---
         init() {
-            // Load settings
             const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
             this.applyTheme(savedTheme);
             const savedCurrency = localStorage.getItem('financialSculptor.currency') || 'GBP';
             this.setCurrency(savedCurrency, true);
             this.DOM.currencyPicker.value = savedCurrency;
-
-            // Load Data
             this.state.goals = this.loadGoals();
             this.applyPendingAllocations();
-            
-            // Initial Renders
+            this.renderAll();
+            this.bindEvents();
+            const initialPage = window.location.hash.substring(1) || 'dashboard';
+            this.navigateTo(initialPage);
+        },
+
+        renderAll() {
             this.renderGoals();
             this.renderWorkshopStrategies();
             this.renderWorkshopSliders();
             this.applyWorkshopStrategy('balanced');
             this.renderSplitterStrategies();
             this.applySplitterStrategy('conservative');
-
-            // Bind Events
-            this.bindEvents();
-
-            // Initial Navigation
-            const initialPage = window.location.hash.substring(1) || 'dashboard';
-            this.navigateTo(initialPage);
         },
 
         bindEvents() {
-            // Global
             this.DOM.navLinks.forEach(link => link.addEventListener('click', e => this.navigateTo(e.target.hash.substring(1))));
             this.DOM.themeToggle.addEventListener('click', () => this.applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
             this.DOM.currencyPicker.addEventListener('change', e => this.setCurrency(e.target.value));
-
-            // Dashboard
             this.DOM.addGoalBtn.addEventListener('click', () => this.openGoalModal());
             document.getElementById('add-goal-form').addEventListener('submit', e => this.handleGoalFormSubmit(e));
             this.DOM.goalsGrid.addEventListener('click', e => this.handleGoalsGridClick(e));
             this.DOM.resetDataBtn.addEventListener('click', () => this.resetGoals());
             [this.DOM.goalModal, this.DOM.historyModal, this.DOM.mappingModal].forEach(m => m.addEventListener('click', e => { if (e.target === m || e.target.matches('.modal-close-btn, .modal-cancel-btn')) m.classList.remove('active'); }));
-            
-            // Workshop
             this.DOM.totalIncomeInput.addEventListener('input', e => { this.state.workshop.totalIncome = parseFloat(e.target.value) || 0; this.updateWorkshopUI(); });
             this.DOM.workshopStrategySelector.addEventListener('click', e => { if (e.target.matches('.strategy-btn')) this.applyWorkshopStrategy(e.target.dataset.strategy); });
             this.DOM.workshopGoalsContainer.addEventListener('input', e => this.handleWorkshopSliderInput(e));
             this.DOM.applyFundsBtn.addEventListener('click', () => this.openMappingModal());
             document.getElementById('mapping-form').addEventListener('submit', e => this.handleMappingFormSubmit(e));
-
-            // Splitter
             this.DOM.profitInput.addEventListener('input', e => { this.state.splitter.profit = parseFloat(e.target.value) || 0; this.renderSplitter(); });
             this.DOM.splitterStrategySelector.addEventListener('click', e => { if (e.target.matches('.strategy-btn')) this.applySplitterStrategy(e.target.dataset.strategy); });
             this.DOM.splitterAllocationContainer.addEventListener('input', e => this.handleSplitterSliderInput(e));
@@ -353,7 +337,11 @@ document.addEventListener('DOMContentLoaded', () => {
         applyTheme(theme) { document.documentElement.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); },
         
         setCurrency(currencyCode, isInitial = false) { 
-            this.state.currency = currencyCode; 
+            this.state.currency = currencyCode;
+            const symbol = this.config.CURRENCY_SYMBOLS[currencyCode] || '$';
+            this.DOM.workshopCurrencySymbol.textContent = symbol;
+            this.DOM.splitterCurrencySymbol.textContent = symbol;
+            
             if(!isInitial) {
                 localStorage.setItem('financialSculptor.currency', currencyCode);
                 this.renderGoals();
@@ -395,22 +383,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 const card = document.createElement('div');
                 card.className = 'goal-card';
                 card.dataset.goalIndex = index;
-                card.innerHTML = `<div class="card-actions"><button class="card-action-btn delete-goal-btn">🗑️</button></div><h3>${goal.name}</h3><div class="progress-bar-container"><div class="progress-bar" style="--progress: ${progress}%;"></div></div><div><span>${this.formatCurrency(goal.current)} of ${this.formatCurrency(goal.target)}</span></div><div><strong>${(p => { if (p >= 100) return "Complete!"; if (p >= 50) return "On Track"; return "Just Started"; })(progress)}</strong></div>`;
+                card.innerHTML = `
+                    <div class="card-actions"><button class="card-action-btn delete-goal-btn" title="Delete Goal">🗑️</button></div>
+                    <h3>${goal.name}</h3>
+                    <div>${this.formatCurrency(goal.current)} of ${this.formatCurrency(goal.target)}</div>
+                    <div class="progress-bar-container"><div class="progress-bar" style="--progress: ${progress}%;"></div></div>
+                    <div class="goal-card-footer">
+                        <strong>${(p => { if (p >= 100) return "Complete!"; if (p >= 50) return "On Track"; return "Just Started"; })(progress)}</strong>
+                        <button class="add-funds-btn" data-goal-index="${index}">Add</button>
+                    </div>`;
                 this.DOM.goalsGrid.appendChild(card);
             });
         },
         openGoalModal() {
+            if (this.state.goals.length >= this.config.MAX_FREE_GOALS) {
+                alert("You can only add 3 goals, for now. Love the ambition!");
+                return;
+            }
             document.getElementById('add-goal-form').reset();
             this.DOM.goalModal.classList.add('active');
         },
         handleGoalFormSubmit(e) {
             e.preventDefault();
-            const newGoal = {
-                name: e.target.elements['goal-name'].value,
-                current: parseFloat(e.target.elements['current-amount'].value),
-                target: parseFloat(e.target.elements['target-amount'].value),
-                transactions: []
-            };
+            const newGoal = { name: e.target.elements['goal-name'].value, current: parseFloat(e.target.elements['current-amount'].value), target: parseFloat(e.target.elements['target-amount'].value), transactions: [] };
             this.state.goals.push(newGoal);
             this.addTransaction(this.state.goals.length - 1, newGoal.current, 'Initial Amount');
             this.saveGoals();
@@ -420,12 +415,31 @@ document.addEventListener('DOMContentLoaded', () => {
         handleGoalsGridClick(e) {
             const card = e.target.closest('.goal-card');
             if (!card) return;
-            const index = card.dataset.goalIndex;
+            const index = parseInt(card.dataset.goalIndex, 10);
             if (e.target.closest('.delete-goal-btn')) { 
                 e.stopPropagation(); 
                 if (confirm('Delete this goal?')) { this.state.goals.splice(index, 1); this.saveGoals(); this.renderGoals(); } 
+            } else if (e.target.closest('.add-funds-btn')) {
+                e.stopPropagation();
+                this.manuallyAddFunds(index);
             } else {
                 this.openHistoryModal(index);
+            }
+        },
+        manuallyAddFunds(index) {
+            const goal = this.state.goals[index];
+            if (!goal) return;
+            const amountStr = prompt(`How much would you like to add to "${goal.name}"?`);
+            if (amountStr) {
+                const amount = parseFloat(amountStr);
+                if (!isNaN(amount) && amount > 0) {
+                    goal.current += amount;
+                    this.addTransaction(index, amount, 'Manual Addition');
+                    this.saveGoals();
+                    this.renderGoals();
+                } else {
+                    alert("Please enter a valid positive number.");
+                }
             }
         },
         openHistoryModal(index) {
@@ -444,12 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.state.workshop.activeStrategy = key;
             this.DOM.workshopStrategySelector.querySelectorAll('.strategy-btn').forEach(b => b.classList.toggle('active', b.dataset.strategy === key));
             if (key !== 'custom') {
-                 this.state.workshop.allocations.forEach(g => {
-                    const percent = this.config.WorkshopStrategies[key].allocations[g.id] || 0;
-                    g.percent = percent;
-                    const slider = document.getElementById(`slider-${g.id}`);
-                    if(slider) slider.value = percent;
-                 });
+                 this.state.workshop.allocations.forEach(g => { const percent = this.config.WorkshopStrategies[key].allocations[g.id] || 0; g.percent = percent; const slider = document.getElementById(`slider-${g.id}`); if(slider) slider.value = percent; });
             }
             this.updateWorkshopUI();
         },
@@ -458,29 +467,19 @@ document.addEventListener('DOMContentLoaded', () => {
             this.state.workshop.activeStrategy = 'custom';
             this.DOM.workshopStrategySelector.querySelectorAll('.strategy-btn').forEach(b => b.classList.remove('active'));
             this.DOM.workshopStrategySelector.querySelector('.strategy-btn[data-strategy="custom"]').classList.add('active');
-            
             const changedId = e.target.dataset.id;
             let newValue = parseFloat(e.target.value);
-            
             let otherTotal = 0;
             this.state.workshop.allocations.forEach(g => { if(g.id !== changedId) otherTotal += g.percent });
-            if (newValue + otherTotal > 100) {
-                newValue = 100 - otherTotal;
-                // FIX: This visual cap can feel jerky. The added CSS transition helps smooth it.
-                e.target.value = newValue;
-            }
-
+            if (newValue + otherTotal > 100) { newValue = 100 - otherTotal; e.target.value = newValue; }
             const allocation = this.state.workshop.allocations.find(g => g.id === changedId);
             if (allocation) allocation.percent = newValue;
-            
             this.updateWorkshopUI();
         },
         updateWorkshopUI() {
             let totalPercent = this.state.workshop.allocations.reduce((sum, g) => sum + g.percent, 0);
             this.DOM.chartTotalValue.textContent = `${totalPercent.toFixed(0)}%`;
-            this.state.workshop.allocations.forEach(g => {
-                document.getElementById(`value-${g.id}`).textContent = this.formatCurrency(this.state.workshop.totalIncome * (g.percent / 100));
-            });
+            this.state.workshop.allocations.forEach(g => { document.getElementById(`value-${g.id}`).textContent = this.formatCurrency(this.state.workshop.totalIncome * (g.percent / 100)); });
             this.updateBarChart();
             this.DOM.applyFundsBtn.disabled = totalPercent < 1;
         },
@@ -491,18 +490,15 @@ document.addEventListener('DOMContentLoaded', () => {
         openMappingModal() {
             if(this.state.goals.length === 0) { alert("Please create goals on the Dashboard first."); return; }
             const options = this.state.goals.map(g => `<option value="${g.name}">${g.name}</option>`).join('');
-            this.DOM.mappingModal.querySelector('#mapping-modal-body').innerHTML = this.state.workshop.allocations.filter(a => a.percent > 0)
-                .map(a => `<div><label>${a.name}: <strong>${this.formatCurrency(this.state.workshop.totalIncome * a.percent / 100)}</strong></label><select class="mapping-select" data-amount="${this.state.workshop.totalIncome * a.percent / 100}"><option value="">-- Select Goal --</option>${options}</select></div>`).join('');
+            this.DOM.mappingModal.querySelector('#mapping-modal-body').innerHTML = this.state.workshop.allocations.filter(a => a.percent > 0).map(a => `<div><label>${a.name}: <strong>${this.formatCurrency(this.state.workshop.totalIncome * a.percent / 100)}</strong></label><select class="mapping-select" data-amount="${this.state.workshop.totalIncome * a.percent / 100}"><option value="">-- Select Goal --</option>${options}</select></div>`).join('');
             this.DOM.mappingModal.classList.add('active');
         },
         handleMappingFormSubmit(e) {
             e.preventDefault();
-            const allocationsToSave = Array.from(document.querySelectorAll('.mapping-select'))
-                .filter(s => s.value)
-                .map(s => ({ goalName: s.value, amount: s.dataset.amount }));
+            const allocationsToSave = Array.from(document.querySelectorAll('.mapping-select')).filter(s => s.value).map(s => ({ goalName: s.value, amount: s.dataset.amount }));
             localStorage.setItem(this.config.PENDING_ALLOCATION_KEY, JSON.stringify(allocationsToSave));
             window.location.hash = '#dashboard';
-            location.reload(); // Simple way to ensure dashboard re-reads from storage
+            location.reload();
         },
 
         // --- Splitter Methods ---
@@ -510,24 +506,19 @@ document.addEventListener('DOMContentLoaded', () => {
         applySplitterStrategy(key) {
             this.state.splitter.activeStrategy = key;
             this.DOM.splitterStrategySelector.querySelectorAll('.strategy-btn').forEach(b => b.classList.toggle('active', b.dataset.strategy === key));
-            if (key !== 'custom') {
-                this.state.splitter.customModel = { ...this.config.SplitterStrategies[key].model };
-            }
+            if (key !== 'custom') { this.state.splitter.customModel = { ...this.config.SplitterStrategies[key].model }; }
             this.renderSplitter();
         },
         renderSplitter() {
             const isCustom = this.state.splitter.activeStrategy === 'custom';
             const model = isCustom ? this.state.splitter.customModel : this.config.SplitterStrategies[this.state.splitter.activeStrategy].model;
             const values = { cash: this.state.splitter.profit * (model.cash / 100), assets: this.state.splitter.profit * (model.assets / 100), investments: this.state.splitter.profit * (model.investments / 100) };
-            
             let customSlidersHTML = '';
             if (isCustom) {
                 const totalPercent = Object.values(model).reduce((s, v) => s + v, 0);
                 customSlidersHTML = `<div class="allocation-header"><h2>CUSTOM ALLOCATION</h2><span id="allocation-total" class="${Math.round(totalPercent) === 100 ? 'complete' : ''}">Total: ${Math.round(totalPercent)}%</span></div>
                     ${Object.keys(model).map(key => `<div class="slider-row"><label>${this.config.SplitterCategoryNames[key]}</label><input type="range" class="slider" data-key="${key}" value="${model[key]}" min="0" max="100" step="1"><div class="slider-percent">${Math.round(model[key])}%</div></div>`).join('')}`;
             }
-
-            // FIX: Reordered HTML to show summary first, then insights.
             this.DOM.splitterAllocationContainer.innerHTML = `<div class="${isCustom ? '' : 'hidden'}">${customSlidersHTML}</div>
                 <div id="results-container">
                     <div class="summary-section">${Object.keys(values).map(key => `<div class="summary-row"><span>${this.config.SplitterCategoryNames[key]}</span><span class="summary-value">${this.formatCurrency(values[key])}</span></div>`).join('')}</div>
@@ -539,24 +530,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const updatedKey = e.target.dataset.key;
             let newValue = parseInt(e.target.value, 10);
             let otherTotal = 0;
-            for (const key in this.state.splitter.customModel) {
-                if (key !== updatedKey) otherTotal += this.state.splitter.customModel[key];
-            }
-            if (newValue + otherTotal > 100) {
-                newValue = 100 - otherTotal;
-                e.target.value = newValue; // Visually cap slider
-            }
+            for (const key in this.state.splitter.customModel) { if (key !== updatedKey) otherTotal += this.state.splitter.customModel[key]; }
+            if (newValue + otherTotal > 100) { newValue = 100 - otherTotal; e.target.value = newValue; }
             this.state.splitter.customModel[updatedKey] = newValue;
             this.renderSplitter();
         },
         getSplitterInsight(values, percents) {
+            // FIX: Wrapped insights in separate <p> tags for spacing
             if (percents.investments >= 50) return `<div class="insight-card"><h4>The Accelerator: Investment-Heavy</h4><p>Playing the long game. This is how you build serious wealth—by putting your money to work while you sleep.</p><p><strong>Next Play:</strong> Get that <strong>${this.formatCurrency(values.investments)}</strong> into your investment accounts, pronto. Time in the market beats timing the market.</p></div>`;
             if (percents.assets >= 50) return `<div class="insight-card"><h4>The Digital Fort Knox: Asset-Heavy</h4><p>You're prioritizing long-term value and hedging against inflation. A solid move for wealth preservation.</p><p><strong>Next Play:</strong> Ensure your <strong>${this.formatCurrency(values.assets)}</strong> are secured properly. Not your keys, not your crypto.</p></div>`;
             if (percents.cash >= 50) return `<div class="insight-card"><h4>The Fortress: Cash-Heavy</h4><p>Smart move. Cash is king for handling life's curveballs and jumping on opportunities. You're building a solid foundation.</p><p><strong>Next Play:</strong> Secure at least half of that cash—<strong>${this.formatCurrency(values.cash * 0.5)}</strong>—in a high-yield savings account. Don't let it gather dust.</p></div>`;
             return `<div class="insight-card"><h4>The All-Rounder: Balanced</h4><p>The best of both worlds. You're building for tomorrow without forgetting about today. This is the definition of smart, sustainable growth.</p><p><strong>Next Play:</strong> Put your <strong>${this.formatCurrency(values.investments)}</strong> to work in a diversified portfolio.</p></div>`;
         }
     };
-
     App.init();
 });
 </script>
