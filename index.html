@@ -9,480 +9,392 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --font-family-body: 'Inter', sans-serif; --font-family-heading: 'Sora', sans-serif; --border-radius-lg: 24px; --border-radius-md: 16px; --border-radius-sm: 12px; --transition-fast: 0.2s; --transition-medium: 0.4s; --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1); --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --font-family-body: 'Inter', sans-serif; --font-family-heading: 'Sora', sans-serif; --border-radius-lg: 24px; --border-radius-md: 16px; --border-radius-sm: 12px; --transition-fast: 0.2s; --transition-medium: 0.4s; --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        html[data-theme="light"] { --bg-color: #f4f5f7; --card-color: rgba(255, 255, 255, 0.6); --text-color: #1a1a1a; --text-color-heading: #101010; --subtle-text-color: #5a5a6a; --border-color: rgba(0, 0, 0, 0.08); --shadow-color: rgba(90, 90, 120, 0.1); --accent-color: #6C63FF; --accent-glow: rgba(108, 99, 255, 0.3); --input-bg: #f0f2f5; --slider-track: #e4e4e7; --modal-bg: #ffffff; --aurora-1: #6C63FF; --aurora-2: #00C9B1; --success-color: #00A383; --strategy-btn-bg: #e8eaf0; }
-        html[data-theme="dark"] { --bg-color: #0d0c12; --card-color: rgba(26, 26, 30, 0.65); --text-color: #e0e0e5; --text-color-heading: #ffffff; --subtle-text-color: #9090a0; --border-color: rgba(255, 255, 255, 0.1); --shadow-color: rgba(0, 0, 0, 0.4); --accent-color: #8179ff; --accent-glow: rgba(129, 121, 255, 0.4); --input-bg: #2a2a30; --slider-track: #333338; --modal-bg: #19191D; --aurora-1: #8179ff; --aurora-2: #FF6B6B; --success-color: #00C9B1; --strategy-btn-bg: #3a3a40; }
+        html[data-theme="light"] { --bg-color: #f4f5f7; --card-color: rgba(255, 255, 255, 0.75); --text-color: #1a1a1a; --text-color-heading: #101010; --subtle-text-color: #5a5a6a; --border-color: rgba(0, 0, 0, 0.08); --shadow-color: rgba(90, 90, 120, 0.1); --accent-color: #6C63FF; --accent-glow: rgba(108, 99, 255, 0.3); --input-bg: #f0f2f5; --slider-track: #e4e4e7; --modal-bg: #ffffff; --success-color: #00A383; --strategy-btn-bg: #e8eaf0; }
+        html[data-theme="dark"] { --bg-color: #0d0c12; --card-color: rgba(26, 26, 30, 0.65); --text-color: #e0e0e5; --text-color-heading: #ffffff; --subtle-text-color: #9090a0; --border-color: rgba(255, 255, 255, 0.1); --shadow-color: rgba(0, 0, 0, 0.4); --accent-color: #8179ff; --accent-glow: rgba(129, 121, 255, 0.4); --input-bg: #2a2a30; --slider-track: #333338; --modal-bg: #19191D; --success-color: #00C9B1; --strategy-btn-bg: #3a3a40; }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: var(--font-family-body); background-color: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 2rem; transition: background-color var(--transition-medium) ease; position: relative; overflow-x: hidden; }
-        body::before { content: ''; position: fixed; top: 0; left: 50%; width: 150%; height: 150%; background: radial-gradient(circle at 20% 20%, var(--aurora-1), transparent 30%), radial-gradient(circle at 80% 70%, var(--aurora-2), transparent 30%); transform: translate(-50%, -50%); filter: blur(150px) saturate(1.5); opacity: 0.2; animation: background-pan 25s infinite alternate ease-in-out; will-change: transform; z-index: 0; }
-        @keyframes background-pan { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
-        .main-container { width: 100%; max-width: 1100px; background: var(--card-color); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); border-radius: var(--border-radius-lg); border: 1px solid var(--border-color); box-shadow: 0 16px 40px -12px var(--shadow-color); padding: 2.5rem 3rem; z-index: 1; }
-        header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; padding-bottom: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); gap: 1rem; }
+        body { font-family: var(--font-family-body); background-color: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 2rem; }
+        .main-container { width: 100%; max-width: 900px; background: var(--card-color); backdrop-filter: blur(40px); border-radius: var(--border-radius-lg); border: 1px solid var(--border-color); box-shadow: 0 16px 40px -12px var(--shadow-color); padding: 2.5rem 3rem; z-index: 1; }
+        header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); }
         .header-left { display: flex; align-items: center; gap: 3rem; }
-        .header-right { display: flex; align-items: center; gap: 1.5rem; }
-        .app-logo { font-family: var(--font-family-heading); font-size: 1.75rem; font-weight: 700; color: var(--accent-color); }
+        .app-logo { font-family: var(--font-family-heading); font-size: 1.75rem; color: var(--accent-color); text-decoration: none; }
         nav { display: flex; gap: 1.5rem; }
-        nav a { position: relative; text-decoration: none; color: var(--subtle-text-color); font-weight: 500; font-size: 0.95rem; transition: color var(--transition-fast) ease; padding: 4px 8px; border-radius: 8px; }
-        nav a:hover { color: var(--text-color); background-color: color-mix(in srgb, var(--accent-color) 10%, transparent); }
-        nav a.active { color: var(--text-color-heading); font-weight: 600; }
-        .theme-switcher { position: relative; display: flex; align-items: center; background: var(--input-bg); padding: 5px; border-radius: 25px; border: 1px solid var(--border-color); cursor: pointer; }
-        .theme-switcher .icon { z-index: 2; width: 24px; height: 24px; padding: 3px; color: var(--subtle-text-color); }
-        .theme-switcher .switcher-pill { position: absolute; top: 5px; left: 5px; width: 24px; height: 24px; background-color: var(--card-color); border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: transform var(--transition-medium) var(--ease-out-quart); z-index: 1; }
-        html[data-theme="dark"] .theme-switcher .switcher-pill { transform: translateX(30px); }
-        .currency-selector { position: relative; }
-        .currency-selector select { -webkit-appearance: none; appearance: none; background-color: var(--input-bg); border: 1px solid var(--border-color); padding: 5px 30px 5px 10px; border-radius: var(--border-radius-sm); color: var(--text-color); cursor: pointer; font-weight: 600; font-family: var(--font-family-body); }
-        .currency-selector::after { content: '▼'; font-size: 0.6rem; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; }
-        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
-        .page-header h1 { font-family: var(--font-family-heading); font-size: 2.5rem; font-weight: 600; color: var(--text-color-heading); }
-        .btn-primary { background: var(--accent-color); color: white; border: none; padding: 0.8rem 1.6rem; border-radius: var(--border-radius-sm); font-family: var(--font-family-body); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all var(--transition-fast) var(--ease-out-quart); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 15px var(--accent-glow); }
-        .btn-primary:disabled { background-color: var(--subtle-text-color); opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+        nav a { text-decoration: none; color: var(--subtle-text-color); font-weight: 500; transition: color var(--transition-fast) ease; }
+        nav a:hover { color: var(--text-color); }
+        nav a.active { color: var(--accent-color); font-weight: 600; }
+        .btn-primary { background: var(--accent-color); color: white; border: none; padding: 0.8rem 1.6rem; border-radius: var(--border-radius-sm); font-weight: 600; cursor: pointer; transition: all var(--transition-fast) var(--ease-out-quart); }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 8px 15px var(--accent-glow); }
+        .btn-primary:disabled { background-color: var(--input-bg); color: var(--subtle-text-color); opacity: 0.7; cursor: not-allowed; }
+        .premium-feature-btn::after { content: '👑'; margin-left: 0.5em; }
         .modal-overlay { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); display: grid; place-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity var(--transition-medium) ease; }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
-        .modal-content { background-color: var(--modal-bg); border-radius: var(--border-radius-md); padding: 2rem; width: 100%; max-width: 500px; border: 1px solid var(--border-color); transform: scale(0.95); transition: transform var(--transition-medium) var(--ease-out-back); }
+        .modal-content { background-color: var(--modal-bg); border-radius: var(--border-radius-md); padding: 2rem; width: 100%; max-width: 500px; border: 1px solid var(--border-color); transform: scale(0.95); transition: transform 0.2s var(--ease-out-quart); }
         .modal-overlay.active .modal-content { transform: scale(1); }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
         .modal-header h2 { font-family: var(--font-family-heading); font-size: 1.5rem; }
         .modal-close-btn { background: none; border: none; color: var(--subtle-text-color); font-size: 1.5rem; cursor: pointer; }
         .modal-form .input-group { margin-bottom: 1rem; }
-        .modal-form input { width: 100%; padding: 0.75rem; background-color: var(--input-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); color: var(--text-color); font-size: 1rem; }
+        .modal-form input, .modal-form select { width: 100%; padding: 0.75rem; background-color: var(--input-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); color: var(--text-color); font-size: 1rem; }
+        .modal-form select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%239090a0' %3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' /%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1em; }
         .modal-actions { margin-top: 2rem; display: flex; justify-content: flex-end; gap: 1rem; }
-        .btn-secondary { background-color: var(--input-bg); color: var(--text-color); }
-        footer { text-align: center; padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--border-color); color: var(--subtle-text-color); font-size: 0.85rem; }
-        .reset-btn { background: none; border: none; text-decoration: underline; cursor: pointer; color: var(--subtle-text-color); font-size: 0.85rem; }
+        footer { text-align: center; padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--border-color); color: var(--subtle-text-color); }
         .page-section { display: none; }
-        .page-section.active { display: block; animation: fadeIn 0.6s var(--ease-out-quart); }
+        .page-section.active { display: block; animation: fadeIn 0.4s var(--ease-out-quart); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        #add-goal-btn { width: 44px; height: 44px; padding: 0; font-size: 1.5rem; line-height: 44px; text-align: center; }
-        .goals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-        .goal-card { position: relative; background-color: var(--card-color); border-radius: var(--border-radius-md); padding: 1.75rem; border: 1px solid var(--border-color); transition: all 0.3s var(--ease-out-quart); }
-        .goal-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 25px var(--shadow-color); border-color: var(--accent-color); }
-        .card-actions { position: absolute; top: 10px; right: 10px; display: flex; gap: 4px; opacity: 0; transform: translateY(5px); transition: all var(--transition-fast) ease; }
-        .goal-card:hover .card-actions { opacity: 1; transform: translateY(0); }
-        .card-action-btn { background: var(--input-bg); border: 1px solid var(--border-color); color: var(--subtle-text-color); font-size: 1.2rem; cursor: pointer; width: 30px; height: 30px; border-radius: 50%; transition: all var(--transition-fast); }
-        .card-action-btn:hover { color: var(--text-color); transform: scale(1.1); }
-        .goal-card h3 { font-family: var(--font-family-heading); font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .page-header h1 { font-family: var(--font-family-heading); font-size: 2.5rem; }
+        .goals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .goal-card { background-color: var(--card-color); border-radius: var(--border-radius-md); padding: 1.75rem; border: 1px solid var(--border-color); cursor: pointer; }
+        .goal-card.completed { opacity: 0.6; border-style: dashed; }
+        .goal-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+        .goal-card-header h3 { font-size: 1.25rem; }
+        .goal-type-tag { font-weight: 600; background: var(--input-bg); color: var(--subtle-text-color); padding: 4px 8px; border-radius: 8px; font-size: 0.8rem; text-transform: uppercase; }
         .progress-bar-container { width: 100%; height: 10px; background-color: var(--slider-track); border-radius: 5px; overflow: hidden; margin: 1rem 0; }
-        .progress-bar { height: 100%; width: var(--progress, 0%); background: var(--accent-color); border-radius: 5px; transition: width 0.8s var(--ease-out-quart); }
-        #history-modal-body { max-height: 400px; overflow-y: auto; }
-        .transaction-item { display: grid; grid-template-columns: 1fr auto; padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); }
-        .transaction-amount.positive { color: var(--success-color); }
-        .goal-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
-        .add-funds-btn { font-size: 0.8rem; padding: 0.3rem 0.8rem; background-color: var(--strategy-btn-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); cursor: pointer; }
-        .tool-container { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; }
-        .splitter-container { max-width: 800px; margin: 0 auto; }
-        .tool-container h2, .splitter-container h1 { font-family: var(--font-family-heading); margin-bottom: 2rem; font-size: 1.75rem; color: var(--text-color-heading); }
-        .splitter-container h1 { font-size: 2.5rem; }
-        .input-group { margin-bottom: 1.75rem; }
-        .input-group label { display: block; margin-bottom: 0.75rem; color: var(--subtle-text-color); font-weight: 500; }
-        .input-wrapper { position: relative; }
-        .input-wrapper span { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 1.25rem; font-weight: 600; }
-        .input-group input { width: 100%; padding: 0.9rem 1rem 0.9rem 3rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background-color: var(--input-bg); color: var(--text-color); font-size: 1.25rem; font-weight: 600; }
-        .strategy-selector { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-        .strategy-btn { background-color: var(--strategy-btn-bg); border: 1px solid var(--border-color); padding: 0.6rem 1.1rem; border-radius: var(--border-radius-sm); cursor: pointer; transition: all var(--transition-fast) ease; color: var(--subtle-text-color); font-weight: 500;}
-        .strategy-btn:hover { border-color: var(--accent-color); color: var(--text-color); }
-        .strategy-btn.active { background-color: var(--accent-color); color: white; border-color: var(--accent-color); font-weight: 600; }
-        .slider { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: var(--slider-track); border-radius: 4px; outline: none; cursor: pointer; }
-        .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; background: #fff; border: 3px solid var(--accent-color); border-radius: 50%; cursor: pointer; margin-top: -7px; transition: transform var(--transition-fast) ease; }
-        .slider:hover::-webkit-slider-thumb { transform: scale(1.1); }
-        .apply-btn-container { margin-top: 2rem; }
-        .goal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; }
-        .goal-label { display: flex; align-items: center; gap: 8px; font-weight: 500; }
-        .goal-value { font-weight: 600; color: var(--accent-color); background-color: color-mix(in srgb, var(--accent-color) 15%, transparent); padding: 0.2rem 0.6rem; border-radius: 8px; transition: color var(--transition-fast) ease, background-color var(--transition-fast) ease; }
-        .info-dot { width: 16px; height: 16px; display: grid; place-items: center; cursor: help; position: relative; }
-        .info-dot::before { content: ''; width: 6px; height: 6px; background-color: var(--accent-color); opacity: 0.6; border-radius: 50%; }
-        .info-dot:hover .info-tooltip { opacity: 1; transform: translateX(-50%) scale(1); }
-        .info-tooltip { position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%) scale(0.9); background-color: var(--modal-bg); padding: 0.75rem 1rem; border-radius: var(--border-radius-sm); opacity: 0; pointer-events: none; transition: all var(--transition-fast) ease-out; width: 250px; z-index: 10; border: 1px solid var(--border-color); box-shadow: 0 4px 12px var(--shadow-color); font-size: 0.85rem; font-weight: 400; color: var(--text-color); }
-        #chart-total-value { font-size: 3rem; font-weight: 700; color: var(--text-color-heading); }
-        #bar-chart-container { display: flex; flex-direction: column; gap: 1rem; justify-content: center; flex-grow: 1; }
-        .bar-chart-item { display: grid; grid-template-columns: 150px 1fr auto; gap: 1rem; align-items: center; }
-        .bar-chart-bar-wrapper { height: 12px; background-color: var(--slider-track); border-radius: 6px; overflow: hidden; }
-        .bar-chart-bar { height: 100%; width: 100%; transform-origin: left; animation: growBar 0.8s var(--ease-out-quart) forwards; }
-        @keyframes growBar { from { transform: scaleX(0); } to { transform: scaleX(var(--scale, 0)); } }
-        .mapping-select { width: 100%; padding: 0.75rem; background-color: var(--input-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); color: var(--text-color); font-family: var(--font-family-body); }
-        .allocation-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); }
-        .allocation-header h2 { font-family: var(--font-family-body); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--subtle-text-color); margin: 0;}
-        #allocation-total { font-weight: 700; transition: color 0.3s ease; }
-        #allocation-total.complete { color: var(--success-color); }
-        .slider-row { display: grid; grid-template-columns: 160px 1fr 60px; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-        .slider-percent { font-weight: 600; text-align: right; }
-        /* FIX: Insight card collapsible */
-        .insight-card summary { cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
-        .insight-card summary::-webkit-details-marker { display: none; }
-        .insight-card p { line-height: 1.6; margin-top: 1rem; }
-        .summary-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.6rem 0; border-bottom: 1px solid var(--border-color);}
-        .summary-section { padding-bottom: 1rem; }
-        .summary-row:last-child { border-bottom: none; }
-        .summary-value { font-size: 1.5rem; font-weight: 700; color: var(--accent-color); }
-        
-        @media (max-width: 768px) {
-            body { padding: 1rem; }
-            .main-container { padding: 1.5rem; }
-            .page-header h1 { font-size: 1.8rem; }
-            .tool-container { grid-template-columns: 1fr; gap: 2.5rem; }
-            .goals-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 640px) {
-            .header-left { flex-grow: 1; gap: 1rem; }
-            nav { justify-content: flex-start; }
-            .app-logo { font-size: 1.5rem; }
-        }
-        @media (max-width: 480px) {
-            body { padding: 0.5rem; }
-            .main-container { padding: 1rem; border-radius: var(--border-radius-sm); }
-            .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-        }
+        .progress-bar { height: 100%; background: var(--accent-color); border-radius: 5px; transition: width 0.4s var(--ease-out-quart); }
+        .splitter-container h1 { text-align: center; }
+        .strategy-selector { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+        .strategy-btn { background-color: var(--strategy-btn-bg); border: 1px solid var(--border-color); padding: 0.6rem 1.1rem; border-radius: var(--border-radius-sm); cursor: pointer; }
+        .strategy-btn.active { background-color: var(--accent-color); color: white; border-color: var(--accent-color); }
+        .split-plan-card { background-color: var(--card-color); border-radius: var(--border-radius-md); margin-top: 2.5rem; padding: 1rem; }
+        .split-category-row { padding: 1.5rem; }
+        .split-category-row:not(:last-child) { border-bottom: 1px solid var(--border-color); }
+        .split-category-row .details h3 { font-size: 1.25rem; }
+        .split-category-row .amount-display { text-align: right; }
+        .slider { width: 100%; margin-top: 1rem; -webkit-appearance: none; appearance: none; height: 8px; background: var(--slider-track); border-radius: 4px; outline: none; }
+        .slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: #fff; border: 3px solid var(--accent-color); border-radius: 50%; cursor: pointer; }
+        .action-plan { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color); }
+        .action-plan h2 { text-align: center; margin-bottom: 2rem; }
+        .action-item { display: flex; justify-content: space-between; align-items: center; background: var(--card-color); border-radius: var(--border-radius-md); padding: 1rem 1.5rem; margin-bottom: 1rem; }
+        #goal-selector-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .goal-template-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; background-color: var(--input-bg); border-radius: var(--border-radius-sm); padding: 1.25rem; cursor: pointer; }
+        .goal-template-btn .icon { font-size: 1.75rem; }
+        .goal-template-btn.premium .icon { filter: blur(4px); }
+        .transaction-history { list-style: none; padding: 0; max-height: 200px; overflow-y: auto; }
+        .transaction-item { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); }
     </style>
 </head>
 <body>
-
     <div class="main-container">
         <header>
             <div class="header-left">
-                <div class="app-logo">Financial Sculptor</div>
+                <a href="#splitter" class="app-logo">Financial Sculptor</a>
                 <nav>
-                    <a href="#dashboard" class="nav-link active">Dashboard</a>
-                    <a href="#workshop" class="nav-link">Workshop</a>
-                    <a href="#splitter" class="nav-link">Splitter</a>
+                    <a href="#splitter" class="nav-link active">Splitter</a>
+                    <a href="#goals" class="nav-link">Goals</a>
+                    <a href="#studio" class="nav-link premium-feature-btn" style="pointer-events: none; opacity: 0.6;">Studio</a>
                 </nav>
             </div>
-            <div class="header-right">
-                <div class="currency-selector"><select id="currency-picker"><option value="GBP">£ GBP</option><option value="USD">$ USD</option><option value="EUR">€ EUR</option></select></div>
-                <div class="theme-switcher" id="theme-toggle"><div class="switcher-pill"></div><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg></div>
-            </div>
         </header>
-
         <main>
-            <section id="dashboard" class="page-section active">
-                <div class="page-header"><h1>Goal Dashboard</h1><button class="btn-primary" id="add-goal-btn">+</button></div>
+            <section id="splitter" class="page-section active">
+                 <div class="splitter-container">
+                    <h1 class="page-header">You have <span id="amount-title"></span>. Let's make a plan.</h1>
+                    <div class="input-group" style="max-width: 300px; margin: 0 auto 2rem;"><input type="number" id="profit-amount" value="10000" min="0"></div>
+                    <div class="input-group"><div id="splitter-strategy-selector" class="strategy-selector"></div></div>
+                    <div id="splitter-allocation-container"></div>
+                    <div id="action-plan-container"></div>
+                </div>
+            </section>
+            <section id="goals" class="page-section">
+                <div class="page-header"><h1>Your Goals</h1><div><button class="btn-primary premium-feature-btn" id="export-btn" disabled>Export</button><button class="btn-primary" id="add-goal-btn" title="Add New Goal">+</button></div></div>
                 <div class="goals-grid" id="goals-grid-container"></div>
             </section>
-            <section id="workshop" class="page-section">
-                <div class="tool-container">
-                    <div class="left-panel">
-                        <h2>Allocation Workshop</h2>
-                        <div class="input-group"><label for="total-income">Total Sum</label><div class="input-wrapper"><span id="workshop-currency-symbol">£</span><input type="number" id="total-income" value="10000" min="0"></div></div>
-                        <div class="input-group"><label>Choose a Strategy</label><div id="workshop-strategy-selector" class="strategy-selector"></div></div>
-                        <div id="workshop-goals-container" style="display: flex; flex-direction: column; gap: 1.5rem;"></div>
-                    </div>
-                    <div class="right-panel" style="display:flex; flex-direction: column;">
-                        <h2>Visual Overview</h2>
-                        <div id="chart-total-display"><div id="chart-total-value">0%</div><div>Allocated</div></div>
-                        <div id="bar-chart-container"></div>
-                        <div class="apply-btn-container" style="text-align: right;"><button class="btn-primary" id="apply-funds-btn">Apply Funds to Goals</button></div>
-                    </div>
-                </div>
-            </section>
-            <section id="splitter" class="page-section">
-                 <div class="splitter-container">
-                    <h1>Profit & Bonus Splitter</h1>
-                    <div class="input-group"><label for="profit-amount">Amount to Split</label><div class="input-wrapper"><span id="splitter-currency-symbol">£</span><input type="number" id="profit-amount" value="10000" min="0"></div></div>
-                    <div class="input-group"><label>Choose a Strategy</label><div id="splitter-strategy-selector" class="strategy-selector"></div></div>
-                    <div id="splitter-allocation-container"></div>
-                </div>
-            </section>
+            <section id="studio" class="page-section"><div style="text-align: center; padding: 4rem 0;"><h1 style="font-size: 3rem;">👑</h1><h1 class="page-header">The Advanced Strategy Studio</h1><p style="max-width: 450px; margin: 0 auto 2rem;">Unlock the Studio for multi-category splits and unparalleled control over your financial plan.</p><button class="btn-primary" id="studio-upgrade-btn">Upgrade to Unlock The Studio</button></div></section>
         </main>
-        
         <footer>&copy; 2025 Crude Capital. <button class="reset-btn" id="reset-data-btn">Reset Saved Goals</button></footer>
     </div>
-    
-    <!-- Modals -->
-    <div class="modal-overlay" id="add-goal-modal"><div class="modal-content"><div class="modal-header"><h2>Create New Goal</h2><button class="modal-close-btn">&times;</button></div><form id="add-goal-form" class="modal-form"><div class="input-group"><label for="goal-name">Goal Name</label><input type="text" id="goal-name" required></div><div class="input-group"><label for="current-amount">Current Amount</label><input type="number" id="current-amount" required value="0"></div><div class="input-group"><label for="target-amount">Target Amount</label><input type="number" id="target-amount" required min="1"></div><div class="modal-actions"><button type="button" class="btn-primary btn-secondary modal-cancel-btn">Cancel</button><button type="submit" class="btn-primary">Save Goal</button></div></form></div></div>
-    <div class="modal-overlay" id="history-modal"><div class="modal-content"><div class="modal-header"><h2 id="history-modal-title"></h2><button class="modal-close-btn">&times;</button></div><div id="history-modal-body"></div></div></div>
-    <div class="modal-overlay" id="mapping-modal"><div class="modal-content"><div class="modal-header"><h2>Map Funds to Goals</h2><button class="modal-close-btn">&times;</button></div><form id="mapping-form"><div id="mapping-modal-body" style="display: flex; flex-direction: column; gap: 1rem;"></div><div class="modal-actions"><button type="submit" class="btn-primary">Confirm & Apply</button></div></form></div></div>
-    <div class="modal-overlay" id="add-funds-modal"><div class="modal-content"><div class="modal-header"><h2 id="add-funds-modal-title">Add Funds</h2><button class="modal-close-btn">&times;</button></div><form id="add-funds-form" class="modal-form"><div class="input-group"><label for="add-funds-amount">Amount</label><input type="number" id="add-funds-amount" required min="0.01" step="0.01"></div><input type="hidden" id="add-funds-goal-index"><div class="modal-actions"><button type="button" class="btn-primary btn-secondary modal-cancel-btn">Cancel</button><button type="submit" class="btn-primary">Confirm</button></div></form></div></div>
-    <!-- FIX: Custom Alert Modal -->
-    <div class="modal-overlay" id="alert-modal"><div class="modal-content" style="max-width: 400px; text-align: center;"><div class="modal-header" style="justify-content: center;"><h2 id="alert-modal-title"></h2></div><p id="alert-modal-message" style="margin-bottom: 2rem;"></p><div class="modal-actions" style="justify-content: center;"><button type="button" class="btn-primary modal-ok-btn">OK</button></div></div></div>
-
+    <div class="modal-overlay" id="add-goal-chooser-modal"><div class="modal-content" style="max-width: 540px;"><div class="modal-header"><h2>Choose a Goal Type</h2><button class="modal-close-btn">&times;</button></div><div id="goal-selector-grid"></div></div></div>
+    <div class="modal-overlay" id="goal-form-modal"><div class="modal-content"><div class="modal-header"><h2 id="goal-form-title"></h2><button class="modal-close-btn">&times;</button></div><form id="add-goal-form" class="modal-form"><input type="hidden" id="goal-template-id"><input type="hidden" id="goal-type-hidden"><div class="input-group"><label for="goal-name">Goal Name</label><input type="text" id="goal-name" required></div><div class="input-group" id="custom-goal-type-group"><label for="custom-goal-type">Goal Type</label><select id="custom-goal-type" required><option value="" disabled selected>-- Select a type --</option><option value="now">Cash</option><option value="soon">Savings</option><option value="later">Investments</option></select></div><div class="input-group"><label for="target-amount">Target Amount</label><input type="number" id="target-amount" required min="1"></div><div class="input-group"><label for="current-amount">Current Amount</label><input type="number" id="current-amount" required value="0"></div><div class="modal-actions"><button type="button" class="btn-primary" style="background-color: var(--input-bg); color: var(--text-color);" id="goal-form-cancel-btn">Cancel</button><button type="submit" class="btn-primary">Save Goal</button></div></form></div></div>
+    <div class="modal-overlay" id="goal-details-modal"><div class="modal-content"><div class="modal-header"><h2 id="goal-details-title"></h2><button class="modal-close-btn">&times;</button></div><div id="goal-details-body"></div></div></div>
+    <div class="modal-overlay" id="upgrade-modal"><div class="modal-content" style="text-align: center;"><div class="modal-header" style="justify-content:center; border-bottom: none;"><h2 id="upgrade-title"></h2></div><p id="upgrade-message" style="margin: 1rem 0 2rem;"></p><div class="modal-actions" style="justify-content: center;"><button class="btn-primary" id="upgrade-now-btn">Upgrade to Premium</button></div></div></div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const App = {
         state: {
-            currentPage: 'dashboard', currency: 'GBP', goals: [],
-            workshop: { totalIncome: 10000, activeStrategy: 'balanced', allocations: [ { id: 'essentialLiving', name: 'Life Essentials', percent: 0, color: 'linear-gradient(90deg, #6C63FF, #8179ff)', info: "Covers your core survival needs: emergency funds, housing, and essential bills." }, { id: 'financialSecurity', name: 'Security Foundation', percent: 0, color: 'linear-gradient(90deg, #00C9B1, #00DDC3)', info: "Builds your safety net through savings and stable, low-risk investments." }, { id: 'personalGrowth', name: 'Personal Growth', percent: 0, color: 'linear-gradient(90deg, #FFD166, #FFE399)', info: "Invest in yourself: education, new skills, health, and wellness to increase your future potential." }, { id: 'wealthBuilding', name: 'Wealth Engine', percent: 0, color: 'linear-gradient(90deg, #FF6B6B, #FF8888)', info: "Your engine for long-term wealth: stocks, retirement funds, and other growth assets." }, { id: 'relationshipsSocialCapital', name: 'Social Capital', percent: 0, color: 'linear-gradient(90deg, #4ECDC4, #6AF2E9)', info: "Invest in your network: building relationships, networking, and experiences." }, { id: 'communitySocialResponsibility', name: 'Community Impact', percent: 0, color: 'linear-gradient(90deg, #9A63B5, #B488D1)', info: "Give back to causes you care about through charity or local investments." } ] },
-            splitter: { profit: 10000, activeStrategy: 'conservative', customModel: { cash: 60, assets: 25, investments: 15 } }
+            currentPage: 'splitter', currency: 'USD', goals: [],
+            splitter: { total: 10000, activeStrategy: 'balanced', customSplit: { now: 30, soon: 40, later: 30 } }
         },
         config: {
-            GOALS_STORAGE_KEY: 'financialSculptor.goals', PENDING_ALLOCATION_KEY: 'financialSculptor.pendingAllocations', MAX_FREE_GOALS: 3,
-            CURRENCY_SYMBOLS: { GBP: '£', USD: '$', EUR: '€' },
-            WorkshopStrategies: { balanced: { name: 'Balanced', allocations: { essentialLiving: 26, financialSecurity: 25, personalGrowth: 10, wealthBuilding: 20, relationshipsSocialCapital: 15, communitySocialResponsibility: 4 }}, growth: { name: 'Growth', allocations: { essentialLiving: 15, financialSecurity: 35, personalGrowth: 5, wealthBuilding: 40, relationshipsSocialCapital: 3, communitySocialResponsibility: 2 }}, relationship: { name: 'Relationship', allocations: { essentialLiving: 20, financialSecurity: 15, personalGrowth: 20, wealthBuilding: 10, relationshipsSocialCapital: 30, communitySocialResponsibility: 5 }}, custom: { name: 'Custom', allocations: { essentialLiving: 0, financialSecurity: 0, personalGrowth: 0, wealthBuilding: 0, relationshipsSocialCapital: 0, communitySocialResponsibility: 0 }} },
-            SplitterStrategies: { conservative: { name: "Conservative", model: { cash: 60, assets: 25, investments: 15 } }, balanced: { name: "Balanced", model: { cash: 40, assets: 35, investments: 25 } }, aggressive: { name: "Aggressive", model: { cash: 20, assets: 20, investments: 60 } }, custom: { name: "Custom" } },
-            SplitterCategoryNames: { cash: 'Cash', assets: 'Real World Assets', investments: 'Investment Portfolio' }
+            GOALS_STORAGE_KEY: 'fsculpt.goals', MAX_FREE_GOALS: 3,
+            GoalTemplates: {
+                free: [
+                    { id: 'emergency_fund', name: 'Emergency Fund', icon: '🛡️', type: 'now', target: 5000 },
+                    { id: 'house_down_payment', name: 'House Down Payment', icon: '🏠', type: 'soon', target: 50000 },
+                    { id: 'investment_portfolio', name: 'Investment Portfolio', icon: '📈', type: 'later', target: 25000 }
+                ],
+                premium: [ { icon: '🎓' }, { icon: '🚀' }, { icon: '✈️' }, { icon: '❤️‍🩹' }, { icon: '🌳' } ]
+            },
+            SplitterStrategies: {
+                safety: { name: "Safety First", split: { now: 60, soon: 30, later: 10 } },
+                balanced: { name: "Balanced Plan", split: { now: 30, soon: 40, later: 30 } },
+                growth: { name: "Growth Focus", split: { now: 10, soon: 20, later: 70 } },
+                custom: { name: "Custom" }
+            },
+            SplitterCategories: {
+                now: { title: 'Cash', description: 'For your emergency fund & safety.', color: '#8179ff' },
+                soon: { title: 'Savings', description: 'For goals in the next 1-5 years.', color: '#00C9B1' },
+                later: { title: 'Investments', description: 'For long-term wealth & retirement.', color: '#FF6B6B' }
+            }
         },
-        DOM: {},
-        
         init() {
             this.cacheDom();
-            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            this.applyTheme(savedTheme);
-            const savedCurrency = localStorage.getItem('financialSculptor.currency') || 'GBP';
             this.state.goals = this.loadGoals();
-            this.applyPendingAllocations();
-            this.setCurrency(savedCurrency, true);
-            this.DOM.currencyPicker.value = savedCurrency;
+            this.setCurrency(localStorage.getItem('fsculpt.currency') || 'USD', true);
             this.renderAll();
             this.bindEvents();
-            const initialPage = window.location.hash.substring(1) || 'dashboard';
-            this.navigateTo(initialPage);
+            this.navigateTo(window.location.hash.substring(1));
         },
-
         cacheDom() {
             this.DOM = {
-                navLinks: document.querySelectorAll('nav .nav-link'), pages: document.querySelectorAll('.page-section'), currencyPicker: document.getElementById('currency-picker'), themeToggle: document.getElementById('theme-toggle'),
-                goalsGrid: document.getElementById('goals-grid-container'), addGoalBtn: document.getElementById('add-goal-btn'), goalModal: document.getElementById('add-goal-modal'), historyModal: document.getElementById('history-modal'), resetDataBtn: document.getElementById('reset-data-btn'),
-                addFundsModal: document.getElementById('add-funds-modal'), addFundsForm: document.getElementById('add-funds-form'), alertModal: document.getElementById('alert-modal'),
-                totalIncomeInput: document.getElementById('total-income'), workshopCurrencySymbol: document.getElementById('workshop-currency-symbol'), workshopStrategySelector: document.getElementById('workshop-strategy-selector'), workshopGoalsContainer: document.getElementById('workshop-goals-container'), chartTotalValue: document.getElementById('chart-total-value'), barChartContainer: document.getElementById('bar-chart-container'), applyFundsBtn: document.getElementById('apply-funds-btn'), mappingModal: document.getElementById('mapping-modal'),
-                profitInput: document.getElementById('profit-amount'), splitterCurrencySymbol: document.getElementById('splitter-currency-symbol'), splitterStrategySelector: document.getElementById('splitter-strategy-selector'), splitterAllocationContainer: document.getElementById('splitter-allocation-container'),
+                navLinks: document.querySelectorAll('nav .nav-link'),
+                pages: document.querySelectorAll('.page-section'),
+                amountTitle: document.getElementById('amount-title'),
+                goalsGrid: document.getElementById('goals-grid-container'),
+                addGoalBtn: document.getElementById('add-goal-btn'),
+                goalChooserModal: document.getElementById('add-goal-chooser-modal'),
+                goalFormModal: document.getElementById('goal-form-modal'),
+                goalDetailsModal: document.getElementById('goal-details-modal'),
+                upgradeModal: document.getElementById('upgrade-modal'),
+                resetDataBtn: document.getElementById('reset-data-btn'),
+                exportBtn: document.getElementById('export-btn'),
+                profitInput: document.getElementById('profit-amount'),
+                splitterStrategySelector: document.getElementById('splitter-strategy-selector'),
+                splitterAllocationContainer: document.getElementById('splitter-allocation-container'),
+                actionPlanContainer: document.getElementById('action-plan-container'),
+                goalForm: document.getElementById('add-goal-form'),
             };
         },
-
         renderAll() {
-            this.renderGoals(); this.renderWorkshopStrategies(); this.renderWorkshopSliders(); this.applyWorkshopStrategy('balanced'); this.renderSplitterStrategies(); this.applySplitterStrategy('conservative');
-            this.updateWorkshopUI(); this.renderSplitter();
+            this.renderGoals();
+            this.applySplitterStrategy(this.state.splitter.activeStrategy);
         },
-
         bindEvents() {
-            this.DOM.navLinks.forEach(link => link.addEventListener('click', e => this.navigateTo(e.target.hash.substring(1))));
-            this.DOM.themeToggle.addEventListener('click', () => this.applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
-            this.DOM.currencyPicker.addEventListener('change', e => this.setCurrency(e.target.value));
-            this.DOM.addGoalBtn.addEventListener('click', () => this.openGoalModal());
-            document.getElementById('add-goal-form').addEventListener('submit', e => this.handleGoalFormSubmit(e));
-            this.DOM.goalsGrid.addEventListener('click', e => this.handleGoalsGridClick(e));
-            this.DOM.resetDataBtn.addEventListener('click', () => this.resetGoals());
-            const allModals = [this.DOM.goalModal, this.DOM.historyModal, this.DOM.mappingModal, this.DOM.addFundsModal, this.DOM.alertModal];
-            allModals.forEach(m => m.addEventListener('click', e => { if (e.target === m || e.target.matches('.modal-close-btn, .modal-cancel-btn, .modal-ok-btn')) m.classList.remove('active'); }));
-            this.DOM.addFundsForm.addEventListener('submit', e => this.handleManuallyAddFunds(e));
-            this.DOM.totalIncomeInput.addEventListener('input', e => { this.state.workshop.totalIncome = parseFloat(e.target.value) || 0; this.updateWorkshopUI(); });
-            this.DOM.workshopStrategySelector.addEventListener('click', e => { if (e.target.matches('.strategy-btn')) this.applyWorkshopStrategy(e.target.dataset.strategy); });
-            this.DOM.workshopGoalsContainer.addEventListener('input', e => this.handleWorkshopSliderInput(e));
-            this.DOM.applyFundsBtn.addEventListener('click', () => this.openMappingModal());
-            document.getElementById('mapping-form').addEventListener('submit', e => this.handleMappingFormSubmit(e));
-            this.DOM.profitInput.addEventListener('input', e => { this.state.splitter.profit = parseFloat(e.target.value) || 0; this.renderSplitter(); });
-            this.DOM.splitterStrategySelector.addEventListener('click', e => { if (e.target.matches('.strategy-btn')) this.applySplitterStrategy(e.target.dataset.strategy); });
-            this.DOM.splitterAllocationContainer.addEventListener('input', e => this.handleSplitterSliderInput(e));
+            this.DOM.navLinks.forEach(link => link.addEventListener('click', e => {
+                if(link.classList.contains('premium-feature-btn')) {
+                    e.preventDefault();
+                    this.showUpgradeModal('The Advanced Strategy Studio', 'The Studio is a premium feature for multi-category splits and unparalleled control. Upgrade to unlock.');
+                } else { this.navigateTo(e.target.hash.substring(1)); }
+            }));
+            document.querySelector('.app-logo').addEventListener('click', e => this.navigateTo('splitter'));
+            this.DOM.addGoalBtn.addEventListener('click', () => this.openGoalChooser());
+            this.DOM.exportBtn.addEventListener('click', () => this.showUpgradeModal('Export Your Goals', 'Export your goals and transaction history as a CSV file with a Premium account.'));
+            this.DOM.goalForm.addEventListener('submit', e => this.handleGoalFormSubmit(e));
+            this.DOM.resetDataBtn.addEventListener('click', () => this.resetData());
+            [this.DOM.goalChooserModal, this.DOM.goalFormModal, this.DOM.goalDetailsModal, this.DOM.upgradeModal].forEach(m => {
+                m.addEventListener('click', e => {
+                    if (e.target === m || e.target.closest('.modal-close-btn, #goal-form-cancel-btn')) m.classList.remove('active');
+                    if (e.target.closest('#upgrade-now-btn')) { alert("Redirecting to checkout..."); m.classList.remove('active'); }
+                });
+            });
+            this.DOM.profitInput.addEventListener('input', e => {
+                this.state.splitter.total = parseFloat(e.target.value) || 0;
+                this.DOM.amountTitle.textContent = this.formatCurrency(this.state.splitter.total);
+                this.renderSplitter();
+            });
+            this.DOM.splitterStrategySelector.addEventListener('click', e => {
+                const button = e.target.closest('.strategy-btn:not(:disabled)');
+                if (button) this.applySplitterStrategy(button.dataset.strategy);
+            });
+            this.DOM.actionPlanContainer.addEventListener('click', e => {
+                const button = e.target.closest('.btn-apply');
+                if (button) {
+                    const { goalId, amount } = button.dataset;
+                    this.applyFundsToGoal(goalId, parseFloat(amount));
+                }
+            });
+            this.DOM.goalChooserModal.addEventListener('click', e => {
+                const button = e.target.closest('.goal-template-btn');
+                if (!button || button.disabled) return;
+                this.DOM.goalChooserModal.classList.remove('active');
+                if (button.dataset.id === 'custom') {
+                    this.openGoalForm();
+                } else if (button.dataset.id === 'premium') {
+                    this.showUpgradeModal('Unlock Premium Goals', 'Unlock the full collection of goal types with Premium.');
+                } else {
+                    const template = this.config.GoalTemplates.free.find(t => t.id === button.dataset.id);
+                    this.openGoalForm(template);
+                }
+            });
+            this.DOM.goalsGrid.addEventListener('click', e => {
+                const card = e.target.closest('.goal-card');
+                if (card) this.openGoalDetails(card.dataset.goalId);
+            });
         },
-
-        showAlert(title, message) {
-            const modal = this.DOM.alertModal;
-            modal.querySelector('#alert-modal-title').textContent = title;
-            modal.querySelector('#alert-modal-message').textContent = message;
-            modal.classList.add('active');
-        },
-
         navigateTo(pageId) {
-            if (!pageId) pageId = 'dashboard';
+            pageId = ['splitter', 'goals', 'studio'].includes(pageId) ? pageId : 'splitter';
             this.state.currentPage = pageId;
             this.DOM.pages.forEach(p => p.classList.toggle('active', p.id === pageId));
             this.DOM.navLinks.forEach(l => l.classList.toggle('active', l.hash === `#${pageId}`));
         },
-
-        applyTheme(theme) { document.documentElement.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); },
-        
-        setCurrency(currencyCode, isInitial = false) { 
+        setCurrency(currencyCode, isInitial = false) {
             this.state.currency = currencyCode;
-            const symbol = this.config.CURRENCY_SYMBOLS[currencyCode] || '$';
-            this.DOM.workshopCurrencySymbol.textContent = symbol;
-            this.DOM.splitterCurrencySymbol.textContent = symbol;
-            if(!isInitial) { localStorage.setItem('financialSculptor.currency', currencyCode); this.renderAll(); }
+            if (!isInitial) localStorage.setItem('fsculpt.currency', currencyCode);
+            this.DOM.amountTitle.textContent = this.formatCurrency(this.state.splitter.total);
+            this.renderAll();
         },
-
         formatCurrency(amount) {
-            return (new Intl.NumberFormat(undefined, { style: 'currency', currency: this.state.currency, currencyDisplay: 'symbol' }).format(amount)).replace('US$', '$'); 
+            try {
+                return new Intl.NumberFormat(undefined, { style: 'currency', currency: this.state.currency }).format(amount || 0).replace(/[A-Z]{3}/, '').trim();
+            } catch (e) {
+                return `$${(amount || 0).toFixed(2)}`;
+            }
         },
-
-        loadGoals() {
-            const data = localStorage.getItem(this.config.GOALS_STORAGE_KEY);
-            let goals = data ? JSON.parse(data) : [{ name: 'House Down Payment', current: 45000, target: 50000, transactions: [] }, { name: 'Retirement Fund', current: 36000, target: 500000, transactions: [] }];
-            goals.forEach(g => { if (!g.transactions) g.transactions = []; });
-            return goals;
-        },
+        loadGoals() { return JSON.parse(localStorage.getItem(this.config.GOALS_STORAGE_KEY)) || []; },
         saveGoals() { localStorage.setItem(this.config.GOALS_STORAGE_KEY, JSON.stringify(this.state.goals)); },
-        addTransaction(goalIndex, amount, source) { if (amount !== 0) this.state.goals[goalIndex]?.transactions.push({ amount, source, date: new Date().toISOString() }); },
-        applyPendingAllocations() {
-            const pending = localStorage.getItem(this.config.PENDING_ALLOCATION_KEY);
-            if (!pending) return;
-            const allocations = JSON.parse(pending);
-            allocations.forEach(alloc => {
-                const goalIndex = this.state.goals.findIndex(g => g.name === alloc.goalName);
-                if (goalIndex > -1) { const amount = parseFloat(alloc.amount); this.state.goals[goalIndex].current += amount; this.addTransaction(goalIndex, amount, 'Workshop Allocation'); }
-            });
-            this.saveGoals(); localStorage.removeItem(this.config.PENDING_ALLOCATION_KEY);
-        },
         renderGoals() {
-            this.DOM.goalsGrid.innerHTML = this.state.goals.map((goal, index) => {
-                const progress = (goal.target > 0) ? (goal.current / goal.target) * 100 : 0;
-                return `<div class="goal-card" data-goal-index="${index}">
-                    <div class="card-actions"><button class="card-action-btn delete-goal-btn" title="Delete Goal">🗑️</button></div>
-                    <h3>${goal.name}</h3> <div>${this.formatCurrency(goal.current)} of ${this.formatCurrency(goal.target)}</div>
-                    <div class="progress-bar-container"><div class="progress-bar" style="--progress: ${progress}%;"></div></div>
-                    <div class="goal-card-footer">
-                        <strong>${(p => { if (p >= 100) return "Complete!"; if (p >= 50) return "On Track"; return "Just Started"; })(progress)}</strong>
-                        <button class="add-funds-btn" data-goal-index="${index}">Add</button>
-                    </div></div>`;
-            }).join('');
+            this.DOM.goalsGrid.innerHTML = this.state.goals.map((goal) => {
+                const progress = goal.target > 0 ? (goal.current / goal.target) * 100 : 0;
+                const isCompleted = progress >= 100;
+                return `<div class="goal-card ${isCompleted ? 'completed' : ''}" data-goal-id="${goal.id}">
+                    <div class="goal-card-header"><h3>${goal.name}</h3><span class="goal-type-tag">${goal.type}</span></div>
+                    <div>${this.formatCurrency(goal.current)} of ${this.formatCurrency(goal.target)}</div>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: ${progress > 100 ? 100 : progress}%;"></div></div>
+                    ${isCompleted ? '<div style="text-align: right; font-weight: bold; color: var(--success-color);">✓ Completed</div>' : ''}
+                    </div>`;
+            }).join('') || `<p style="grid-column: 1 / -1; text-align: center; color: var(--subtle-text-color);">Click the '+' to create your first goal.</p>`;
         },
-        openGoalModal() {
+        showUpgradeModal(title, message) {
+            const modal = this.DOM.upgradeModal;
+            modal.querySelector('#upgrade-title').textContent = title;
+            modal.querySelector('#upgrade-message').textContent = message;
+            modal.classList.add('active');
+        },
+        openGoalChooser() {
             if (this.state.goals.length >= this.config.MAX_FREE_GOALS) {
-                this.showAlert("Goal Limit Reached", "You can add up to 3 goals on the free plan. Love the ambition!");
+                this.showUpgradeModal('Goal Limit Reached', `You've reached the ${this.config.MAX_FREE_GOALS}-goal limit. Upgrade to create unlimited goals.`);
                 return;
             }
-            document.getElementById('add-goal-form').reset();
-            this.DOM.goalModal.classList.add('active');
+            const grid = this.DOM.goalChooserModal.querySelector('#goal-selector-grid');
+            const existingGoalIds = this.state.goals.map(g => g.templateId);
+            const freeGoalsHtml = this.config.GoalTemplates.free.map(g => `<button class="goal-template-btn" data-id="${g.id}" ${existingGoalIds.includes(g.id) ? 'disabled' : ''}><span class="icon">${g.icon}</span><span>${g.name}</span></button>`).join('');
+            grid.innerHTML = `<div style="grid-column: 1 / -1;">Free Goals</div>${freeGoalsHtml}<button class="goal-template-btn" data-id="custom"><span class="icon">✨</span><span>Custom Goal</span></button><div style="grid-column: 1 / -1; margin-top: 1rem;">Premium Collection</div><button class="goal-template-btn premium full-width-btn" data-id="premium"><div style="display: flex; gap: 1rem; filter: blur(4px);">${this.config.GoalTemplates.premium.map(p => `<span class="icon">${p.icon}</span>`).join('')}</div><span style="margin-top: 1rem;">👑 Upgrade to Unlock</span></button>`;
+            this.DOM.goalChooserModal.classList.add('active');
+        },
+        openGoalForm(template = null) {
+            const modal = this.DOM.goalFormModal;
+            const form = this.DOM.goalForm;
+            form.reset();
+            modal.querySelector('#goal-form-title').textContent = template ? `Create ${template.name}` : 'Create Custom Goal';
+            form.elements['goal-name'].value = template ? template.name : '';
+            form.elements['target-amount'].value = template ? template.target : '';
+            form.elements['goal-template-id'].value = template ? template.id : 'custom';
+            form.elements['goal-type-hidden'].value = template ? template.type : '';
+            form.elements['custom-goal-type-group'].style.display = template ? 'none' : 'block';
+            modal.classList.add('active');
         },
         handleGoalFormSubmit(e) {
             e.preventDefault();
-            const newGoal = { name: e.target.elements['goal-name'].value, current: parseFloat(e.target.elements['current-amount'].value), target: parseFloat(e.target.elements['target-amount'].value), transactions: [] };
-            this.state.goals.push(newGoal);
-            this.addTransaction(this.state.goals.length - 1, newGoal.current, 'Initial Amount');
-            this.saveGoals(); this.renderGoals();
-            this.DOM.goalModal.classList.remove('active');
-        },
-        handleGoalsGridClick(e) {
-            const card = e.target.closest('.goal-card');
-            if (!card) return;
-            const index = parseInt(card.dataset.goalIndex, 10);
-            if (e.target.closest('.delete-goal-btn')) { 
-                e.stopPropagation(); 
-                if (confirm('Delete this goal?')) { this.state.goals.splice(index, 1); this.saveGoals(); this.renderGoals(); } 
-            } else if (e.target.closest('.add-funds-btn')) {
-                e.stopPropagation(); this.openAddFundsModal(index);
-            } else { this.openHistoryModal(index); }
-        },
-        openAddFundsModal(index) {
-            const goal = this.state.goals[index];
-            if (!goal) return;
-            const modal = this.DOM.addFundsModal;
-            modal.querySelector('#add-funds-modal-title').textContent = `Add to "${goal.name}"`;
-            modal.querySelector('#add-funds-goal-index').value = index;
-            modal.querySelector('#add-funds-amount').value = '';
-            modal.classList.add('active');
-            modal.querySelector('#add-funds-amount').focus();
-        },
-        handleManuallyAddFunds(e) {
-            e.preventDefault();
-            const modal = this.DOM.addFundsModal;
-            const index = parseInt(modal.querySelector('#add-funds-goal-index').value, 10);
-            const amount = parseFloat(modal.querySelector('#add-funds-amount').value);
-            if (index >= 0 && !isNaN(amount) && amount > 0) {
-                this.state.goals[index].current += amount;
-                this.addTransaction(index, amount, 'Manual Addition');
-                this.saveGoals(); this.renderGoals();
-                modal.classList.remove('active');
-            } else { this.showAlert("Invalid Amount", "Please enter a valid positive number."); }
-        },
-        openHistoryModal(index) {
-            const goal = this.state.goals[index];
-            this.DOM.historyModal.querySelector('#history-modal-title').textContent = `History for "${goal.name}"`;
-            const body = this.DOM.historyModal.querySelector('#history-modal-body');
-            body.innerHTML = goal.transactions.length === 0 ? `<p>No transactions recorded.</p>` : `<ul>${[...goal.transactions].reverse().map(t => `<li class="transaction-item"><div>${t.source}</div><div class="transaction-amount positive">+${this.formatCurrency(t.amount)}</div></li>`).join('')}</ul>`;
-            this.DOM.historyModal.classList.add('active');
-        },
-        resetGoals() { if(confirm("Reset all goals to default?")) { localStorage.removeItem(this.config.GOALS_STORAGE_KEY); this.state.goals = this.loadGoals(); this.renderGoals(); }},
-        renderWorkshopStrategies() { this.DOM.workshopStrategySelector.innerHTML = Object.keys(this.config.WorkshopStrategies).map(k => `<button class="strategy-btn" data-strategy="${k}">${this.config.WorkshopStrategies[k].name}</button>`).join(''); },
-        renderWorkshopSliders() { this.DOM.workshopGoalsContainer.innerHTML = this.state.workshop.allocations.map(g => `<div><div class="goal-header"><label class="goal-label">${g.name}<div class="info-dot"><div class="info-tooltip">${g.info}</div></div></label><span class="goal-value" id="value-${g.id}"></span></div><input type="range" class="slider" id="slider-${g.id}" data-id="${g.id}" value="0" min="0" max="100" step="0.5"></div>`).join(''); },
-        applyWorkshopStrategy(key) {
-            this.state.workshop.activeStrategy = key;
-            this.DOM.workshopStrategySelector.querySelectorAll('.strategy-btn').forEach(b => b.classList.toggle('active', b.dataset.strategy === key));
-            if (key !== 'custom') {
-                 this.state.workshop.allocations.forEach(g => { const percent = this.config.WorkshopStrategies[key].allocations[g.id] || 0; g.percent = percent; const slider = document.getElementById(`slider-${g.id}`); if(slider) slider.value = percent; });
+            const form = e.target;
+            const templateId = form.elements['goal-template-id'].value;
+            const isCustom = templateId === 'custom';
+            const goalType = isCustom ? form.elements['custom-goal-type'].value : form.elements['goal-type-hidden'].value;
+
+            if (isCustom && !goalType) {
+                alert('Please select a goal type for your custom goal.');
+                return;
             }
-            this.updateWorkshopUI();
+
+            const newGoal = {
+                id: Date.now(), templateId: templateId,
+                name: form.elements['goal-name'].value, type: goalType,
+                current: parseFloat(form.elements['current-amount'].value) || 0,
+                target: parseFloat(form.elements['target-amount'].value), transactions: []
+            };
+            if(newGoal.current > 0) newGoal.transactions.push({ amount: newGoal.current, date: new Date().toISOString(), source: 'Initial Amount'});
+            this.state.goals.push(newGoal);
+            this.saveGoals(); this.renderGoals(); this.renderSplitter();
+            this.DOM.goalFormModal.classList.remove('active');
         },
-        handleWorkshopSliderInput(e) {
-            if (!e.target.matches('.slider')) return;
-            this.state.workshop.activeStrategy = 'custom';
-            this.DOM.workshopStrategySelector.querySelectorAll('.strategy-btn').forEach(b => b.classList.remove('active'));
-            this.DOM.workshopStrategySelector.querySelector('.strategy-btn[data-strategy="custom"]').classList.add('active');
-            const changedId = e.target.dataset.id;
-            let newValue = parseFloat(e.target.value);
-            let otherTotal = 0;
-            this.state.workshop.allocations.forEach(g => { if(g.id !== changedId) otherTotal += g.percent });
-            if (newValue + otherTotal > 100) { newValue = 100 - otherTotal; e.target.value = newValue; }
-            const allocation = this.state.workshop.allocations.find(g => g.id === changedId);
-            if (allocation) allocation.percent = newValue;
-            this.updateWorkshopUI();
+        openGoalDetails(goalId) {
+            const goal = this.state.goals.find(g => g.id == goalId);
+            if (!goal) return;
+            const modal = this.DOM.goalDetailsModal;
+            modal.querySelector('#goal-details-title').textContent = goal.name;
+            const body = modal.querySelector('#goal-details-body');
+            const history = goal.transactions && goal.transactions.length > 0
+                ? [...goal.transactions].reverse().map(t => `<li class="transaction-item"><span>${new Date(t.date).toLocaleDateString()} - ${t.source}</span><span>+${this.formatCurrency(t.amount)}</span></li>`).join('')
+                : '<li>No contributions yet.</li>';
+            body.innerHTML = `<p><strong>Progress:</strong> ${this.formatCurrency(goal.current)} / ${this.formatCurrency(goal.target)}</p><h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">History</h4><ul class="transaction-history">${history}</ul>`;
+            modal.classList.add('active');
         },
-        updateWorkshopUI() {
-            let totalPercent = this.state.workshop.allocations.reduce((sum, g) => sum + g.percent, 0);
-            this.DOM.chartTotalValue.textContent = `${totalPercent.toFixed(0)}%`;
-            this.state.workshop.allocations.forEach(g => { document.getElementById(`value-${g.id}`).textContent = this.formatCurrency(this.state.workshop.totalIncome * (g.percent / 100)); });
-            this.updateBarChart();
-            this.DOM.applyFundsBtn.disabled = totalPercent < 1;
-        },
-        updateBarChart() {
-            const allocated = this.state.workshop.allocations.filter(g => g.percent > 0).sort((a,b) => b.percent - a.percent);
-            this.DOM.barChartContainer.innerHTML = allocated.map(g => `<div class="bar-chart-item"><div>${g.name}</div><div class="bar-chart-bar-wrapper"><div class="bar-chart-bar" style="--scale:${g.percent/100}; background:${g.color};"></div></div><div>${g.percent.toFixed(0)}%</div></div>`).join('');
-        },
-        openMappingModal() {
-            if(this.state.goals.length === 0) { this.showAlert("No Goals Found", "Please create goals on the Dashboard first before applying funds."); return; }
-            const options = this.state.goals.map(g => `<option value="${g.name}">${g.name}</option>`).join('');
-            this.DOM.mappingModal.querySelector('#mapping-modal-body').innerHTML = this.state.workshop.allocations.filter(a => a.percent > 0).map(a => `<div><label>${a.name}: <strong>${this.formatCurrency(this.state.workshop.totalIncome * a.percent / 100)}</strong></label><select class="mapping-select" data-amount="${this.state.workshop.totalIncome * a.percent / 100}"><option value="">-- Select Goal --</option>${options}</select></div>`).join('');
-            this.DOM.mappingModal.classList.add('active');
-        },
-        handleMappingFormSubmit(e) {
-            e.preventDefault();
-            const allocationsToSave = Array.from(document.querySelectorAll('.mapping-select')).filter(s => s.value).map(s => ({ goalName: s.value, amount: s.dataset.amount }));
-            localStorage.setItem(this.config.PENDING_ALLOCATION_KEY, JSON.stringify(allocationsToSave));
-            window.location.hash = '#dashboard';
-            location.reload();
-        },
-        renderSplitterStrategies() { this.DOM.splitterStrategySelector.innerHTML = Object.keys(this.config.SplitterStrategies).map(k => `<button class="strategy-btn" data-strategy="${k}">${this.config.SplitterStrategies[k].name}</button>`).join(''); },
+        resetData() { if (confirm("This will reset all goals. Are you sure?")) { localStorage.clear(); location.reload(); } },
         applySplitterStrategy(key) {
             this.state.splitter.activeStrategy = key;
-            this.DOM.splitterStrategySelector.querySelectorAll('.strategy-btn').forEach(b => b.classList.toggle('active', b.dataset.strategy === key));
-            if (key !== 'custom') { this.state.splitter.customModel = { ...this.config.SplitterStrategies[key].model }; }
+            const selector = this.DOM.splitterStrategySelector;
+            const strategies = Object.keys(this.config.SplitterStrategies);
+            selector.innerHTML = strategies.map(k => `<button class="strategy-btn ${k === key ? 'active' : ''}" data-strategy="${k}">${this.config.SplitterStrategies[k].name}</button>`).join('')
+             + `<button class="strategy-btn premium-feature-btn" id="advanced-strategies-btn" disabled>Advanced</button>`;
+            
+            const advancedBtn = selector.querySelector('#advanced-strategies-btn');
+            if(advancedBtn) advancedBtn.addEventListener('click', () => this.showUpgradeModal('Unlock Advanced Strategies', 'The Studio is a premium feature with advanced strategies and multi-category splits.'));
+
+            if (key !== 'custom') this.state.splitter.customSplit = { ...this.config.SplitterStrategies[key].split };
             this.renderSplitter();
         },
         renderSplitter() {
             const isCustom = this.state.splitter.activeStrategy === 'custom';
-            const model = isCustom ? this.state.splitter.customModel : this.config.SplitterStrategies[this.state.splitter.activeStrategy].model;
-            const values = { cash: this.state.splitter.profit * (model.cash / 100), assets: this.state.splitter.profit * (model.assets / 100), investments: this.state.splitter.profit * (model.investments / 100) };
-            let customSlidersHTML = '';
-            if (isCustom) {
-                const totalPercent = Object.values(model).reduce((s, v) => s + v, 0);
-                customSlidersHTML = `<div class="allocation-header"><h2>CUSTOM ALLOCATION</h2><span id="allocation-total" class="${Math.round(totalPercent) === 100 ? 'complete' : ''}">Total: ${Math.round(totalPercent)}%</span></div>
-                    ${Object.keys(model).map(key => `<div class="slider-row"><label>${this.config.SplitterCategoryNames[key]}</label><input type="range" class="slider" data-key="${key}" value="${model[key]}" min="0" max="100" step="1"><div class="slider-percent">${Math.round(model[key])}%</div></div>`).join('')}`;
+            const split = isCustom ? this.state.splitter.customSplit : this.config.SplitterStrategies[this.state.splitter.activeStrategy].split;
+            let categoriesHTML = '';
+            for (const key in this.config.SplitterCategories) {
+                const category = this.config.SplitterCategories[key];
+                const value = this.state.splitter.total * ((split[key] || 0) / 100);
+                categoriesHTML += `<div class="split-category-row"><div class="details"><h3>${category.title}</h3><p>${category.description}</p>${isCustom ? `<input type="range" class="slider" data-key="${key}" value="${split[key] || 0}" min="0" max="100" step="1">` : ''}</div><div class="amount-display"><div class="percent" style="color:${category.color}">${Math.round(split[key] || 0)}%</div><div>${this.formatCurrency(value)}</div></div></div>`;
             }
-            this.DOM.splitterAllocationContainer.innerHTML = `<div class="${isCustom ? '' : 'hidden'}">${customSlidersHTML}</div>
-                <div id="results-container">
-                    <div class="summary-section">${Object.keys(values).map(key => `<div class="summary-row"><span>${this.config.SplitterCategoryNames[key]}</span><span class="summary-value">${this.formatCurrency(values[key])}</span></div>`).join('')}</div>
-                    ${this.getSplitterInsight(values, model)}
-                </div>`;
+            this.DOM.splitterAllocationContainer.innerHTML = `<div class="split-plan-card">${categoriesHTML}</div>`;
+            if (isCustom) this.DOM.splitterAllocationContainer.querySelectorAll('.slider').forEach(slider => slider.addEventListener('input', e => this.handleSplitterSliderInput(e)));
+            this.renderActionPlan();
         },
         handleSplitterSliderInput(e) {
-            if (!e.target.matches('.slider')) return;
             const updatedKey = e.target.dataset.key;
-            let newValue = parseInt(e.target.value, 10);
-            let otherTotal = 0;
-            for (const key in this.state.splitter.customModel) { if (key !== updatedKey) otherTotal += this.state.splitter.customModel[key]; }
-            if (newValue + otherTotal > 100) { newValue = 100 - otherTotal; e.target.value = newValue; }
-            this.state.splitter.customModel[updatedKey] = newValue;
+            let newValue = parseFloat(e.target.value);
+            const oldValue = this.state.splitter.customSplit[updatedKey];
+            const diff = newValue - oldValue;
+            
+            let otherTotal = 100 - oldValue;
+            if(otherTotal <= 0) {
+                let otherKeys = Object.keys(this.state.splitter.customSplit).filter(k => k !== updatedKey);
+                otherKeys.forEach(k => { this.state.splitter.customSplit[k] = (100 - newValue) / otherKeys.length; });
+            } else {
+                for (const key in this.state.splitter.customSplit) {
+                    if (key !== updatedKey) {
+                        const proportion = this.state.splitter.customSplit[key] / otherTotal;
+                        this.state.splitter.customSplit[key] -= diff * proportion;
+                    }
+                }
+            }
+            this.state.splitter.customSplit[updatedKey] = newValue;
+
+            let total = 0;
+            for(const key in this.state.splitter.customSplit) { if(this.state.splitter.customSplit[key] < 0) this.state.splitter.customSplit[key] = 0; total += this.state.splitter.customSplit[key]; }
+            if (total > 0) { const factor = 100 / total; for(const key in this.state.splitter.customSplit) { this.state.splitter.customSplit[key] *= factor; } }
+            
             this.renderSplitter();
         },
-        getSplitterInsight(values, percents) {
-            let title = ''; let content = ''; let nextPlay = '';
-            if (percents.investments >= 50) {
-                title = `🚀 The Accelerator: Investment Heavy`;
-                content = `Playing the long game. This is how you build serious wealth—by putting your money to work while you sleep.`;
-                nextPlay = `<strong>Next Play:</strong> Get that <strong>${this.formatCurrency(values.investments)}</strong> into your investment accounts, pronto. Time in the market beats timing the market.`;
-            } else if (percents.assets >= 50) {
-                 title = `💎 Fort Knox: Asset Heavy`;
-                 content = `You're prioritizing long-term value and hedging against inflation. A solid move for wealth preservation.`;
-                 nextPlay = `<strong>Next Play:</strong> Ensure your <strong>${this.formatCurrency(values.assets)}</strong> are secured properly. Not your keys, not your crypto.`;
-            } else if (percents.cash >= 50) {
-                title = `🛡️ The Classic: Cash Heavy`;
-                content = `Smart move. Cash is king for handling life's curveballs and jumping on opportunities. You're building a solid foundation.`;
-                nextPlay = `<strong>Next Play:</strong> Secure at least half of that cash—<strong>${this.formatCurrency(values.cash * 0.5)}</strong>—in a high-yield savings account. Don't let it gather dust.`;
-            } else {
-                title = `⚖️ The All-Rounder: Balanced`;
-                content = `The best of both worlds. You're building for tomorrow without forgetting about today. This is the definition of smart, sustainable growth.`;
-                nextPlay = `<strong>Next Play:</strong> Put your <strong>${this.formatCurrency(values.investments)}</strong> to work in a diversified portfolio.`;
+        renderActionPlan() {
+            const split = this.state.splitter.activeStrategy === 'custom' ? this.state.splitter.customSplit : this.config.SplitterStrategies[this.state.splitter.activeStrategy].split;
+            const funds = { now: this.state.splitter.total * (split.now/100), soon: this.state.splitter.total * (split.soon/100), later: this.state.splitter.total * (split.later/100) };
+            const relevantGoals = this.state.goals.filter(g => funds[g.type] > 0 && g.current < g.target);
+            let planHTML = '';
+            if (relevantGoals.length > 0) {
+                planHTML += '<h2>Your Action Plan</h2>';
+                relevantGoals.forEach(goal => { planHTML += `<div class="action-item"><span>Apply to ${goal.name}</span><button class="btn-primary btn-apply" data-goal-id="${goal.id}" data-amount="${funds[goal.type]}">+ ${this.formatCurrency(funds[goal.type])}</button></div>`; });
+            } else if (this.state.splitter.total > 0) {
+                planHTML += `<div style="text-align:center; margin-top: 3rem;"><p>Create a goal to assign these funds.</p><button class="btn-primary" onclick="App.openGoalChooser()">+ Create a Goal</button></div>`;
             }
-            return `<details class="insight-card"><summary>${title}</summary><p>${content}</p><p>${nextPlay}</p></details>`;
+            this.DOM.actionPlanContainer.innerHTML = `<div class="action-plan">${planHTML}</div>`;
+        },
+        applyFundsToGoal(goalId, amount) {
+            const goalIndex = this.state.goals.findIndex(g => g.id == goalId);
+            if (goalIndex === -1) return;
+            this.state.goals[goalIndex].current += amount;
+            if (!this.state.goals[goalIndex].transactions) this.state.goals[goalIndex].transactions = [];
+            this.state.goals[goalIndex].transactions.push({ amount, date: new Date().toISOString(), source: 'Splitter' });
+            this.saveGoals(); this.renderGoals();
+            this.DOM.actionPlanContainer.querySelector(`[data-goal-id="${goalId}"]`).closest('.action-item').innerHTML = `<span style="color: var(--success-color);">✓ Applied to ${this.state.goals[goalIndex].name}!</span>`;
         }
     };
+
     App.init();
 });
 </script>
