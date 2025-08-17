@@ -133,6 +133,44 @@
             body { padding: 0.5rem; }
             .main-container { padding: 1rem; border-radius: var(--border-radius-sm); }
             .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+        /* START: MOBILE OPTIMIZATION FIXES */
+@media (max-width: 768px) {
+    .tool-container {
+        /* Stacks the workshop panels vertically */
+        grid-template-columns: 1fr;
+    }
+
+    .bar-chart-item {
+        /* Simplifies the bar chart layout */
+        grid-template-columns: 120px 1fr auto;
+        gap: 0.75rem;
+    }
+    
+    .header-left {
+        /* Better spacing on smaller screens */
+        gap: 1.5rem;
+    }
+
+    nav {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        /* Removes padding to give more space */
+        padding: 1rem 0.5rem;
+    }
+    
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .splitter-container h1 {
+        font-size: 1.8rem;
+    }
+}
+/* END: MOBILE OPTIMIZATION FIXES */
         }
     </style>
 </head>
@@ -141,7 +179,7 @@
     <div class="main-container">
         <header>
             <div class="header-left">
-                <div class="app-logo">Financial Sculptor</div>
+                <a href="#dashboard" class="app-logo" style="text-decoration: none;">Financial Sculptor</a>
                 <nav>
                     <a href="#dashboard" class="nav-link active">Dashboard</a>
                     <a href="#workshop" class="nav-link">Workshop</a>
@@ -163,7 +201,7 @@
                 <div class="tool-container">
                     <div class="left-panel">
                         <h2>Allocation Workshop</h2>
-                        <div class="input-group"><label for="total-income">Total Sum</label><div class="input-wrapper"><span id="workshop-currency-symbol">£</span><input type="number" id="total-income" value="30000" min="0"></div></div>
+                        <div class="input-group"><label for="total-income">Total Sum</label><div class="input-wrapper"><span id="workshop-currency-symbol">£</span><input type="number" id="total-income" value="10000" min="0"></div></div>
                         <div class="input-group"><label>Choose a Strategy</label><div id="workshop-strategy-selector" class="strategy-selector"></div></div>
                         <div id="workshop-goals-container" style="display: flex; flex-direction: column; gap: 1.5rem;"></div>
                     </div>
@@ -201,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const App = {
         state: {
             currentPage: 'dashboard', currency: 'GBP', goals: [],
-            workshop: { totalIncome: 30000, activeStrategy: 'balanced', allocations: [ { id: 'essentialLiving', name: 'Life Essentials', percent: 0, color: 'linear-gradient(90deg, #6C63FF, #8179ff)', info: "Covers your core survival needs: emergency funds, housing, and essential bills." }, { id: 'financialSecurity', name: 'Security Foundation', percent: 0, color: 'linear-gradient(90deg, #00C9B1, #00DDC3)', info: "Builds your safety net through savings and stable, low-risk investments." }, { id: 'personalGrowth', name: 'Personal Growth', percent: 0, color: 'linear-gradient(90deg, #FFD166, #FFE399)', info: "Invest in yourself: education, new skills, health, and wellness to increase your future potential." }, { id: 'wealthBuilding', name: 'Wealth Engine', percent: 0, color: 'linear-gradient(90deg, #FF6B6B, #FF8888)', info: "Your engine for long-term wealth: stocks, retirement funds, and other growth assets." }, { id: 'relationshipsSocialCapital', name: 'Social Capital', percent: 0, color: 'linear-gradient(90deg, #4ECDC4, #6AF2E9)', info: "Invest in your network: building relationships, networking, and experiences." }, { id: 'communitySocialResponsibility', name: 'Community Impact', percent: 0, color: 'linear-gradient(90deg, #9A63B5, #B488D1)', info: "Give back to causes you care about through charity or local investments." } ] },
+            workshop: { totalIncome: 10000, activeStrategy: 'balanced', allocations: [ { id: 'essentialLiving', name: 'Life Essentials', percent: 0, color: 'linear-gradient(90deg, #6C63FF, #8179ff)', info: "Covers your core survival needs: emergency funds, housing, and essential bills." }, { id: 'financialSecurity', name: 'Security Foundation', percent: 0, color: 'linear-gradient(90deg, #00C9B1, #00DDC3)', info: "Builds your safety net through savings and stable, low-risk investments." }, { id: 'personalGrowth', name: 'Personal Growth', percent: 0, color: 'linear-gradient(90deg, #FFD166, #FFE399)', info: "Invest in yourself: education, new skills, health, and wellness to increase your future potential." }, { id: 'wealthBuilding', name: 'Wealth Engine', percent: 0, color: 'linear-gradient(90deg, #FF6B6B, #FF8888)', info: "Your engine for long-term wealth: stocks, retirement funds, and other growth assets." }, { id: 'relationshipsSocialCapital', name: 'Social Capital', percent: 0, color: 'linear-gradient(90deg, #4ECDC4, #6AF2E9)', info: "Invest in your network: building relationships, networking, and experiences." }, { id: 'communitySocialResponsibility', name: 'Community Impact', percent: 0, color: 'linear-gradient(90deg, #9A63B5, #B488D1)', info: "Give back to causes you care about through charity or local investments." } ] },
             splitter: { profit: 10000, activeStrategy: 'conservative', customModel: { cash: 60, assets: 25, investments: 15 } }
         },
         config: {
@@ -464,19 +502,19 @@ document.addEventListener('DOMContentLoaded', () => {
         getSplitterInsight(values, percents) {
             let title = ''; let content = ''; let nextPlay = '';
             if (percents.investments >= 50) {
-                title = `Accelerator: Investment Heavy 🚀 `;
+                title = `Accelerator 🚀 `;
                 content = `Playing the long game. This is how you build serious wealth—by putting your money to work while you sleep.`;
                 nextPlay = `<strong>Next Play:</strong> Get that <strong>${this.formatCurrency(values.investments)}</strong> into your investment accounts, pronto. Time in the market beats timing the market.`;
             } else if (percents.assets >= 50) {
-                 title = `Fort Knox: Asset Heavy 💎 `;
+                 title = `Fort Knox 💎 `;
                  content = `You're building real, tangible wealth that holds its value over time. Smart move for long-term security and inflation protection.`;
                  nextPlay = `<strong>Next Play:</strong> Ensure your <strong>${this.formatCurrency(values.assets)}</strong> are properly secured and diversified across quality assets. Think generational wealth.`;
             } else if (percents.cash >= 50) {
-                title = `Classic: Cash Heavy 🏦 `;
+                title = `Classic 🏦 `;
                 content = `Smart move. Cash is king for handling life's curveballs and jumping on opportunities. You're building a solid foundation.`;
                 nextPlay = `<strong>Next Play:</strong> Secure at least half of that cash—<strong>${this.formatCurrency(values.cash * 0.5)}</strong>—in a high-yield savings account. Don't let it gather dust.`;
             } else {
-                title = `All-Rounder: Balanced ⚖️ `;
+                title = `All-Rounder ⚖️ `;
                 content = `The best of both worlds. You're building for tomorrow without forgetting about today. This is smart, sustainable growth.`;
                 nextPlay = `<strong>Next Play:</strong> Put your <strong>${this.formatCurrency(values.investments)}</strong> to work in a diversified portfolio that balances growth with stability.`;
             }
