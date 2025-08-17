@@ -464,21 +464,21 @@ document.addEventListener('DOMContentLoaded', () => {
         getSplitterInsight(values, percents) {
             let title = ''; let content = ''; let nextPlay = '';
             if (percents.investments >= 50) {
-                title = `🚀 The Accelerator: Investment Heavy`;
+                title = `Accelerator: Investment Heavy 🚀 `;
                 content = `Playing the long game. This is how you build serious wealth—by putting your money to work while you sleep.`;
                 nextPlay = `<strong>Next Play:</strong> Get that <strong>${this.formatCurrency(values.investments)}</strong> into your investment accounts, pronto. Time in the market beats timing the market.`;
             } else if (percents.assets >= 50) {
-                 title = `💎 Fort Knox: Asset Heavy`;
-                 content = `You're prioritizing long-term value and hedging against inflation. A solid move for wealth preservation.`;
-                 nextPlay = `<strong>Next Play:</strong> Ensure your <strong>${this.formatCurrency(values.assets)}</strong> are secured properly. Not your keys, not your crypto.`;
+                 title = `Fort Knox: Asset Heavy 💎 `;
+                 content = `You're building real, tangible wealth that holds its value over time. Smart move for long-term security and inflation protection.`;
+                 nextPlay = `<strong>Next Play:</strong> Ensure your <strong>${this.formatCurrency(values.assets)}</strong> are properly secured and diversified across quality assets. Think generational wealth.`;
             } else if (percents.cash >= 50) {
-                title = `🛡️ The Fortress: Cash Heavy`;
+                title = `Classic: Cash Heavy 🏦 `;
                 content = `Smart move. Cash is king for handling life's curveballs and jumping on opportunities. You're building a solid foundation.`;
                 nextPlay = `<strong>Next Play:</strong> Secure at least half of that cash—<strong>${this.formatCurrency(values.cash * 0.5)}</strong>—in a high-yield savings account. Don't let it gather dust.`;
             } else {
-                title = `⚖️ All-Rounder: Balanced`;
-                content = `The best of both worlds. You're building for tomorrow without forgetting about today. This is the definition of smart, sustainable growth.`;
-                nextPlay = `<strong>Next Play:</strong> Put your <strong>${this.formatCurrency(values.investments)}</strong> to work in a diversified portfolio.`;
+                title = `All-Rounder: Balanced ⚖️ `;
+                content = `The best of both worlds. You're building for tomorrow without forgetting about today. This is smart, sustainable growth.`;
+                nextPlay = `<strong>Next Play:</strong> Put your <strong>${this.formatCurrency(values.investments)}</strong> to work in a diversified portfolio that balances growth with stability.`;
             }
             return `<details class="insight-card"><summary>${title}</summary><p>${content}</p><p>${nextPlay}</p></details>`;
         }
