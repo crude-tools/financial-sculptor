@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from './context/AppContext';
 import Layout from './components/core/Layout';
-import Header from './components/core/Header';
+import Header from './components/core/header';
 
 // CORRECTED LINES: Using a capital 'P' to match your folder
 import GoalsPage from './Pages/GoalsPage';
