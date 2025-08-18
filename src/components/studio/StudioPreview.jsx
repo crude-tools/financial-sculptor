@@ -1,4 +1,3 @@
-jsx
 import React from 'react';
 import { Lock, BarChart, Gem } from 'lucide-react';
 

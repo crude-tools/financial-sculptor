@@ -1,6 +1,4 @@
-
-
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Confetti from 'react-confetti';
 import useWindowSize from 'react-use/lib/useWindowSize';

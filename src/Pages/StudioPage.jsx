@@ -1,4 +1,3 @@
-jsx
 import React from 'react';
 import { useFinancialStore } from '../store/useFinancialStore';
 import StudioPreview from '../components/studio/StudioPreview';

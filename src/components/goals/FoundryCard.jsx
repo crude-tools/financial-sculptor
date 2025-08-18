@@ -1,4 +1,3 @@
-jsx
 import React, { useContext } from 'react';
 import { useFinancialStore } from '../../store/useFinancialStore';
 import { AppContext } from '../../context/AppContext';
