@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
 import { AppContext } from '../../context/AppContext';
 import { useFinancialStore } from '../../store/useFinancialStore';
-import { Target, Trash2, PlusCircle } from 'lucide-react';
+import { Trash2, PlusCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const GoalCard = ({ goal }) => {

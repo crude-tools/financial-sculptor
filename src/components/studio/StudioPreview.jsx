@@ -1,5 +1,5 @@
 import React from 'react';
-import { Lock, BarChart, Gem } from 'lucide-react';
+import { Lock, Gem } from 'lucide-react';
 
 const StudioPreview = () => {
   const handleUpgrade = () => {

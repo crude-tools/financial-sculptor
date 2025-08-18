@@ -1,8 +1,7 @@
-jsx
 import React, { useContext } from 'react';
 import { AppContext } from '../../context/AppContext';
 import { Sun, Moon, Briefcase, DollarSign, LayoutDashboard, SlidersHorizontal, Gem } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const NavLink = ({ page, label, icon }) => {
     const { currentPage, setCurrentPage } = useContext(AppContext);
@@ -36,7 +35,24 @@ const Header = () => {
       </nav>
 
       <div className="flex items-center gap-4">
-        {/* ... Currency Selector and Theme Toggle code remains the same as previous prompt ... */}
+        <div className="relative">
+          <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            className="pl-9 pr-4 py-2 bg-input border border-border rounded-md appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
+          >
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="EUR">EUR</option>
+          </select>
+        </div>
+        <button
+          onClick={toggleTheme}
+          className="relative flex items-center justify-center h-10 w-10 bg-input border border-border rounded-full"
+        >
+          {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+        </button>
       </div>
     </header>
   );

@@ -20,7 +20,6 @@ export const useFinancialStore = create(
         completedGoalsCount: 0,
       },
 
-      // Actions
       addGoal: (newGoal) => {
         const { user } = get();
         const currentGoals = get().goals.length;
@@ -49,7 +48,6 @@ export const useFinancialStore = create(
               const newCurrent = g.current + amount;
               const isCompleted = !g.completed && newCurrent >= g.target;
               if (isCompleted) {
-                // Trigger user level up check
                 get()._checkUserLevelUp();
               }
               return { ...g, current: newCurrent, completed: isCompleted };
@@ -65,18 +63,16 @@ export const useFinancialStore = create(
               let newTier = state.user.tier;
               if (completedGoals >= 3 && state.user.tier === 'BASIC') {
                   newTier = 'INTERMEDIATE';
-                  // In a real app, you'd show a modal here!
                   setTimeout(() => alert("Congratulations! You've completed 3 goals and unlocked Intermediate features!"), 500);
               }
               return { user: { ...state.user, completedGoalsCount: completedGoals, tier: newTier } };
           });
       },
       
-      // Getter for easy access to derived state
       featureAccess: () => FeatureGates[get().user.tier],
     }),
     {
-      name: 'financial-sculptor-store-v3', // localStorage key
+      name: 'financial-sculptor-store-v3',
     }
   )
 );
