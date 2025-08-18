@@ -1,5 +1,4 @@
-javascript
-// src/App.jsx
+
 
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
