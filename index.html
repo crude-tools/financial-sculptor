@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Sculptor - Your Goals</title>
-    <meta name="description" content="Use the free Splitter tool to instantly allocate your funds to real financial goals. Track your progress and get inspired with daily wisdom.">
+    <title>Financial Sculptor</title>
+    <meta name="description" content="Shape your financial future by setting goals and allocating funds with powerful, simple tools.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
         
         /* Authentication Screen Styles */
         #auth-screen { width: 100%; display: flex; align-items: center; justify-content: center; min-height: calc(100vh - 4rem); }
-        .auth-container { background-color: var(--card-color); border: 1px solid var(--border-color); box-shadow: 0 16px 40px -12px var(--shadow-color); border-radius: var(--border-radius-lg); padding: 2.5rem 3rem; width: 100%; max-width: 450px; }
+        .auth-container { background-color: var(--card-color); border: 1px solid var(--border-color); box-shadow: 0 16px 40px -12px var(--shadow-color); border-radius: var(--border-radius-lg); padding: 2.5rem 3rem; width: 100%; max-w: 450px; }
         .auth-container h2 { font-family: var(--font-family-heading); font-size: 2rem; text-align: center; margin-bottom: 2rem; color: var(--text-color-heading); }
         .auth-container .input-group { margin-bottom: 1.25rem; }
         .auth-container .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--subtle-text-color); }
@@ -38,7 +38,7 @@
         #panel-content { height: 100%; overflow-y: auto; }
         .app-logo { font-family: var(--font-family-heading); font-size: 1.75rem; color: var(--accent-color); text-decoration: none; }
         nav { display: flex; gap: 1.5rem; } nav a { text-decoration: none; color: var(--subtle-text-color); font-weight: 500; } nav a.active { color: var(--accent-color); font-weight: 600; }
-        .premium-nav-link::after { content: '👑'; font-size: 0.7em; margin-left: 0.25rem; }
+        .premium-nav-link::after { content: '🎖️'; font-size: 0.7em; margin-left: 0.25rem; }
         .header-right { display: flex; align-items: center; gap: 1rem; }
         .currency-selector-wrapper { position: relative; }
         .currency-selector-wrapper select { -webkit-appearance: none; appearance: none; background-color: var(--input-bg); border: 1px solid var(--border-color); padding: 8px 32px 8px 12px; border-radius: var(--border-radius-sm); color: var(--text-color); cursor: pointer; font-family: var(--font-family-body); }
@@ -54,49 +54,86 @@
         footer { text-align: center; padding-top: 1.5rem; margin-top: 2.5rem; border-top: 1px solid var(--border-color); color: var(--subtle-text-color); }
         #amount-display { font-size: 2.5rem; font-weight: 700; color: var(--accent-color); font-family: var(--font-family-heading); }
         .range-slider { -webkit-appearance: none; width: 100%; height: 12px; background: var(--slider-track); border-radius: 6px; outline: none; margin: 1rem 0;} .range-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; background: #fff; border: 4px solid var(--accent-color); border-radius: 50%; cursor: pointer; }
-        .strategy-selector { display:flex; justify-content: center; gap: 0.75rem; margin-top: 2rem; margin-bottom: 2rem; }
+        .strategy-selector { display:flex; justify-content: center; gap: 0.75rem; }
+        .strategy-selector-title { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; }
+        .info-icon { cursor: pointer; font-weight: bold; color: var(--subtle-text-color); border: 1px solid var(--subtle-text-color); border-radius: 50%; width: 20px; height: 20px; display: inline-grid; place-items: center; font-size: 0.8rem; }
         .strategy-btn { background-color: var(--strategy-btn-inactive-bg); border: 1px solid var(--border-color); color: var(--strategy-btn-inactive-color); padding: 0.6rem 1.1rem; }
         .strategy-btn.active { background-color: var(--accent-color); color: white; border-color: var(--accent-color); }
-        .split-result-card { border-radius: var(--border-radius-md); border: 1px solid var(--border-color); }
+        .split-result-card { border-radius: var(--border-radius-md); border: 1px solid var(--border-color); margin-top: 2rem; }
         .split-category-row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 1rem; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); }
         .split-category-row:last-child { border-bottom: none; }
-        .btn-assign { padding: 0.5rem 1rem; font-size: 0.85rem; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color); }
-        .assign-popup { display: none; position: absolute; background-color: var(--modal-bg); border-radius: var(--border-radius-md); box-shadow: 0 8px 20px var(--shadow-color); z-index: 100; padding: 0.5rem; width: max-content; right: 0; bottom: 50px; }
-        .assign-popup.active { display: block; }
-        .assign-popup-item { padding: 0.5rem 1rem; border-radius: var(--border-radius-sm); cursor: pointer; }
-        .assign-popup-item:hover { background-color: var(--input-bg); }
-        #sculptor-wisdom { text-align: center; color: var(--subtle-text-color); margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color); }
+        .wisdom-container { text-align: center; color: var(--subtle-text-color); margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color); }
         .goals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
-        .goal-card { position: relative; background: var(--card-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 1.5rem; cursor: pointer; }
+        .goal-card { position: relative; background: var(--card-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 1.5rem; }
+        .goal-card h3 { display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem;}
+        .goal-card-icon { font-size: 1.25rem; }
         .foundry-card { background-color: var(--input-bg); }
+        .foundry-card h3 { font-size: 1.5rem !important; }
         .progress-bar-container { width: 100%; height: 8px; background-color: var(--slider-track); border-radius: 4px; overflow: hidden; margin: 0.75rem 0; }
         .goal-card-footer { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--subtle-text-color); }
         .goal-completed-message { text-align: center; padding: 1rem 0; font-weight: 600; color: var(--success-color); }
-        .get-report-btn { position: absolute; top: 0.75rem; right: 0.75rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; opacity: 0.8; }
-        .btn-add-funds { position: absolute; top: 0.75rem; right: 0.75rem; width: 32px; height: 32px; background: var(--accent-color); color: white; border-radius: 50%; display: grid; place-items: center; font-size: 1.5rem; font-weight: 500; line-height: 1; padding-bottom: 2px; }
+        .btn-add-funds { position: absolute; top: 0.75rem; right: 2.75rem; /* Make space for menu */ width: 32px; height: 32px; background: var(--accent-color); color: white; border-radius: 50%; display: grid; place-items: center; font-size: 1.5rem; font-weight: 500; line-height: 1; padding-bottom: 2px; }
         .input-group { margin-bottom: 1rem; }
         .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
         .input-group input, .input-group select { width: 100%; padding: 0.75rem; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); color: var(--text-color); font-family: var(--font-family-body); }
-        .modal-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
-        .modal-actions .btn { padding: 0.8rem; flex-grow: 1; font-size: 0.9rem; }
+        .amount-input-wrapper { position: relative; display: flex; align-items: center; }
+        .amount-input-wrapper input { padding-right: 60px; /* Space for Max button */ }
+        .btn-max-vis { position: absolute; right: 6px; top: 6px; height: calc(100% - 12px); border: none; background: var(--accent-color); color: white; border-radius: var(--border-radius-sm); padding: 0 0.75rem; font-weight: 600; cursor: pointer;}
+        .percentage-buttons { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+        .btn-percentage { flex-grow: 1; padding: 0.5rem; background-color: var(--input-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); cursor: pointer; }
+        .preset-buttons { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+        .btn-preset { flex-grow: 1; padding: 0.5rem; background-color: var(--input-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); cursor: pointer; }
+        #goal-selector-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .goal-template-btn { background-color: var(--input-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 1.5rem 1rem; text-align: center; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; font-weight: 600; }
+        .goal-template-btn:hover { transform: translateY(-4px); border-color: var(--accent-color); }
+        .goal-template-btn .icon { font-size: 2rem; }
+        .modal-section-header { font-weight: 500; color: var(--subtle-text-color); padding-bottom: 0.75rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+        
+        /* Goal Management Menu Styles */
+        .goal-menu-btn { position: absolute; top: 0.75rem; right: 0.75rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; opacity: 0.6; line-height: 1; padding: 0.25rem; color: var(--subtle-text-color); font-weight: bold; }
+        .goal-menu-popup { display: none; position: absolute; top: 2.5rem; right: 0.75rem; background-color: var(--modal-bg); border-radius: var(--border-radius-sm); box-shadow: 0 8px 20px var(--shadow-color); z-index: 110; padding: 0.5rem; width: 120px; }
+        .goal-menu-popup.active { display: block; }
+        .goal-menu-item { padding: 0.5rem 1rem; border-radius: var(--border-radius-sm); cursor: pointer; }
+        .goal-menu-item:hover { background-color: var(--input-bg); }
+        .goal-menu-item.delete { color: #f87171; }
+
+        /* Modals (Completion & Success) */
+        .modal-overlay { position: fixed; inset: 0; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 200; display: none; align-items: center; justify-content: center; }
+        .modal-content { background: var(--card-color); padding: 3rem; border-radius: var(--border-radius-lg); text-align: center; max-width: 500px; }
+        .modal-content h2 { font-family: var(--font-family-heading); font-size: 2.5rem; margin-bottom: 1rem; }
+        .modal-content p { margin-bottom: 2rem; color: var(--subtle-text-color); }
+
+        /* Foundry Buttons & Transaction Styles */
+        .foundry-actions { position: absolute; top: 0.75rem; right: 0.75rem; display: flex; gap: 0.5rem; }
+        .foundry-btn { background: var(--card-color); border: 1px solid var(--border-color); border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: grid; place-items: center; font-size: 1.2rem; }
         .transaction-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; border-bottom: 1px solid var(--border-color); font-size: 0.9rem;}
         .transaction-item:last-child { border-bottom: none; }
         .transaction-details { display: flex; flex-direction: column; gap: 0.25rem; }
         .transaction-source { font-weight: 600; }
         .transaction-date { font-size: 0.8rem; color: var(--subtle-text-color); }
         .transaction-amount { font-weight: 600; color: var(--success-color); font-size: 1rem;}
-        #goal-selector-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .goal-template-btn { background-color: var(--input-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 1.5rem 1rem; text-align: center; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; font-weight: 600; }
-        .goal-template-btn:hover { transform: translateY(-4px); border-color: var(--accent-color); }
-        .goal-template-btn .icon { font-size: 2rem; }
-        .modal-section-header { font-weight: 500; color: var(--subtle-text-color); padding-bottom: 0.75rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
-        .amount-input-wrapper { display: flex; align-items: center; gap: 0.5rem; }
-        .amount-input-wrapper input { flex-grow: 1; }
-        .btn-max { padding: 0.75rem 1rem; background-color: var(--input-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); cursor: pointer; font-weight: 600; }
-        .preset-amounts { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
-        .btn-preset { flex-grow: 1; padding: 0.5rem; background-color: var(--input-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); cursor: pointer; }
-        .btn-preset:disabled { opacity: 0.4; cursor: not-allowed; }
-        .btn-preset:active:not(:disabled) { background-color: var(--accent-color); color: white; }
+        .btn-assign-to-foundry { background-color: var(--input-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); color: var(--text-color); padding: 0.5rem 0.8rem; font-size: 1.2rem; cursor: pointer; transition: all 0.2s ease;}
+        .btn-assign-to-foundry:hover { background-color: var(--accent-color); color: white; }
+        
+        /* Icon Selector Styles */
+        .icon-selector { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
+        .icon-btn { font-size: 1.5rem; background: var(--input-bg); border-radius: var(--border-radius-sm); padding: 0.5rem; cursor: pointer; border: 2px solid transparent; transition: all 0.2s ease;}
+        .icon-btn.selected { border-color: var(--accent-color); background-color: var(--accent-glow); }
+
+        /* Completion Summary Styles */
+        .completion-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left; margin-bottom: 2rem; }
+        .summary-item { background: var(--input-bg); padding: 1rem; border-radius: var(--border-radius-md); }
+        .summary-item .label { font-size: 0.8rem; color: var(--subtle-text-color); }
+        .summary-item .value { font-size: 1.25rem; font-weight: 600; }
+
+        /* Strategy Info Panel Styles */
+        .info-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); }
+        .info-tab { padding: 0.5rem 1rem; border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0; cursor: pointer; border: 1px solid transparent; border-bottom: none; }
+        .info-tab.active { background: var(--card-color); border-color: var(--border-color); border-bottom: 1px solid var(--card-color); }
+        .info-content { display: none; }
+        .info-content.active { display: block; }
+        .info-content h4 { font-family: var(--font-family-heading); margin-bottom: 0.5rem; }
+        .info-content p { font-size: 0.9rem; color: var(--subtle-text-color); line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -143,31 +180,52 @@
                     <div class="page-header" style="text-align: center;"><h1>Split Amount</h1></div>
                     <div id="amount-display-wrapper" style="text-align:center;"><span id="amount-display"></span></div>
                     <input type="range" min="100" max="30000" value="10000" step="100" class="range-slider" id="profit-slider">
-                    <div style="text-align:center;"><label style="margin-bottom:1rem;">Choose a Strategy</label><div id="splitter-strategy-selector" class="strategy-selector"></div></div>
+                    <div class="strategy-selector-title">
+                        <label>Choose a Strategy</label>
+                        <span id="strategy-info-btn" class="info-icon">ⓘ</span>
+                    </div>
+                    <div id="splitter-strategy-selector" class="strategy-selector"></div>
                     <div id="splitter-allocation-container"></div>
+                    <div class="wisdom-container" id="splitter-wisdom"></div>
                 </section>
                 <section id="goals" class="page-section">
                     <div class="page-header" style="display:flex; justify-content:space-between; align-items:center;">
                         <h1>Your Goals</h1>
                         <div style="display: flex; gap: 0.5rem;">
-                            <button id="export-btn" class="btn btn-secondary btn-header">Export 👑</button>
+                            <button id="export-btn" class="btn btn-secondary btn-header">Export 🎖️</button>
                             <button class="btn btn-primary btn-header" id="add-goal-btn">New Goal</button>
                         </div>
                     </div>
                     <div class="goals-grid" id="goals-grid-container"></div>
-                    <div id="sculptor-wisdom"></div>
+                    <div class="wisdom-container" id="goals-wisdom"></div>
                 </section>
             </main>
-            <footer>© 2025 Financial Sculptor. <button id="reset-data-btn" style="all:unset;text-decoration:underline;cursor:pointer;">Reset Account</button></footer>
+            <footer>© 2025 Financial Sculptor.</footer>
         </div>
         <aside id="context-panel"><button class="panel-close-btn">&times;</button><div id="panel-content"></div></aside>
     </div>
 
+    <!-- Goal Completion Modal -->
+    <div id="goal-complete-modal" class="modal-overlay">
+        <div class="modal-content" id="completion-content-wrapper">
+            <!-- Content will be injected by JS -->
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 style="font-size: 2rem;">Success!</h2>
+            <p id="success-message">Resources successfully transferred to your Foundry.</p>
+        </div>
+    </div>
+
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-
+    
     // --- USER MANAGEMENT & AUTH ---
-    let allUsers = JSON.parse(localStorage.getItem('financialSculptorUsers_V1')) || [];
+    let allUsers = JSON.parse(localStorage.getItem('financialSculptorUsers_V_Final')) || [];
     let currentUser = null;
 
     const authScreen = document.getElementById('auth-screen');
@@ -201,18 +259,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const newUser = {
             username,
             password: signupForm['signup-password'].value,
-            data: null // Initialize with null data
+            data: null
         };
         allUsers.push(newUser);
         saveAllUsers();
-        login(newUser, true); // Pass true for isNewUser
+        login(newUser);
     });
 
-    function login(user, isNewUser = false) {
+    function login(user) {
         currentUser = user;
         authScreen.style.display = 'none';
         appContainer.style.display = 'grid';
-        App.init(isNewUser);
+        App.init();
     }
 
     function logout() {
@@ -227,8 +285,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function saveAllUsers() {
-        localStorage.setItem('financialSculptorUsers_V1', JSON.stringify(allUsers));
+        localStorage.setItem('financialSculptorUsers_V_Final', JSON.stringify(allUsers));
     }
+
 
     // --- CORE APPLICATION LOGIC ---
     const App = {
@@ -237,35 +296,33 @@ document.addEventListener('DOMContentLoaded', () => {
             MAX_FREE_GOALS: 2,
             FREE_SPLITTER_LIMIT: 30000,
             FREE_GOAL_LIMIT: 30000,
-            FREE_FOUNDRY_LIMIT: 10000,
+            FREE_FOUNDRY_LIMIT: 20000,
+            GOAL_ICONS: ['🏠', '🚗', '💍', '✈️', '🎓', '💼', '❤️', '💡', '🛡️', '🌱'],
             WISDOM_QUOTES: [ "You don't have to be great to get started, but you have to get started to be great.", "A goal without a plan is just a wish.", "The stock market is a device for transferring money from the impatient to the patient.", "Wealth is the ability to fully experience life.", "It’s not your salary that makes you rich, it’s your spending habits.", "Financial peace isn't the acquisition of stuff. It's learning to live on less than you make." ],
-            SplitterStrategies: { classic: { name: "Classic", split: { cash: 60, savings: 30, investments: 10 } }, balanced: { name: "Balanced", split: { cash: 30, savings: 40, investments: 30 } }, growth: { name: "Growth", split: { cash: 10, savings: 20, investments: 70 } }, cashOnly: { name: "Cash Only", split: { cash: 100, savings: 0, investments: 0}}, custom: { name: "Custom 👑"}},
+            SplitterStrategies: { classic: { name: "Classic", split: { cash: 70, savings: 20, investments: 10 } }, balanced: { name: "Balanced", split: { cash: 50, savings: 30, investments: 20 } }, growth: { name: "Growth", split: { cash: 30, savings: 20, investments: 50 } }, custom: { name: "Custom 🎖️"}},
             SplitterCategories: { cash: { title: 'Cash'}, savings: { title: 'Savings'}, investments: { title: 'Investments'}},
-            GoalTemplates: { free: [{ id: 'emergency_fund', name: 'Emergency Fund', icon: '🛡️', type: 'cash'}, { id: 'house_payment', name: 'House Payment', icon: '🏠', type: 'savings'}, { id: 'investment_portfolio', name: 'Investments', icon: '📈', type: 'investments'}, {id: 'custom', name: 'Custom Goal', icon: '✨', type: 'custom'}] },
+            GoalTemplates: { free: [{ id: 'emergency_fund', name: 'Emergency Fund', icon: '🛡️', type: 'Short Term'}, { id: 'house_payment', name: 'House Payment', icon: '🏠', type: 'Long Term'}, { id: 'investment_portfolio', name: 'Investments', icon: '📈', type: 'Long Term'}, {id: 'custom', name: 'Custom Goal', icon: '✨', type: 'custom'}] },
             PRESET_AMOUNTS: [1000, 5000, 10000, 20000]
         },
-        init(isNewUser = false) {
+        init() {
             this.cacheDom();
             this.loadState();
             this.applyTheme(localStorage.getItem('fsculpt.theme') || 'dark');
             this.setCurrency(this.state.currency, true);
             this.renderAll();
             this.bindEvents();
-
-            // "Goals First" user journey
             this.navigateTo(window.location.hash.substring(1) || 'goals');
-            
-            // New user onboarding flow
-            if (isNewUser) {
-                setTimeout(() => this.showGoalFormInPanel('custom'), 500);
-            }
         },
         cacheDom() {
             const headerHTML = `<div class="header-left"><a href="#goals" class="app-logo">Financial Sculptor</a><nav><a href="#goals" class="nav-link active">Goals</a><a href="#splitter" class="nav-link">Splitter</a><a href="#studio" class="nav-link premium-nav-link">Studio</a></nav></div><div class="header-right"><div id="user-greeting" style="color: var(--subtle-text-color); margin-right: 1rem;"></div><div class="currency-selector-wrapper"><select id="currency-picker"><option value="USD">$ USD</option><option value="GBP">£ GBP</option><option value="EUR">€ EUR</option></select></div><button id="theme-switcher" class="theme-switcher">☀️</button><button id="logout-btn" class="btn btn-secondary btn-header" style="margin-left: 1rem;">Logout</button></div>`;
             document.querySelector('header').innerHTML = headerHTML;
             document.getElementById('user-greeting').textContent = `Welcome, ${currentUser.username}`;
             this.DOM = {
-                mainContent: document.getElementById('main-content'), contextPanel: document.getElementById('context-panel'), panelContent: document.getElementById('panel-content'), navLinks: document.querySelectorAll('nav a'), pages: document.querySelectorAll('.page-section'), currencyPicker: document.getElementById('currency-picker'), themeSwitcher: document.getElementById('theme-switcher'), profitSlider: document.getElementById('profit-slider'), amountDisplay: document.getElementById('amount-display'), splitterStrategySelector: document.getElementById('splitter-strategy-selector'), splitterAllocationContainer: document.getElementById('splitter-allocation-container'), goalsGrid: document.getElementById('goals-grid-container'), wisdomContainer: document.getElementById('sculptor-wisdom'), resetBtn: document.getElementById('reset-data-btn'), logoutBtn: document.getElementById('logout-btn')
+                mainContent: document.getElementById('main-content'), contextPanel: document.getElementById('context-panel'), panelContent: document.getElementById('panel-content'), navLinks: document.querySelectorAll('nav a'), pages: document.querySelectorAll('.page-section'), currencyPicker: document.getElementById('currency-picker'), themeSwitcher: document.getElementById('theme-switcher'), profitSlider: document.getElementById('profit-slider'), amountDisplay: document.getElementById('amount-display'), splitterStrategySelector: document.getElementById('splitter-strategy-selector'), splitterAllocationContainer: document.getElementById('splitter-allocation-container'), goalsGrid: document.getElementById('goals-grid-container'), wisdomContainers: document.querySelectorAll('.wisdom-container'),
+                completionModal: document.getElementById('goal-complete-modal'),
+                completionContentWrapper: document.getElementById('completion-content-wrapper'),
+                successModal: document.getElementById('success-modal'),
+                successMessage: document.getElementById('success-message'),
             };
         },
         renderAll() { this.renderSplitter(); this.renderGoals(); this.renderWisdomQuote(); },
@@ -274,17 +331,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 const target = e.target;
                 if(target.closest('.nav-link')) this.navigateTo(target.closest('.nav-link').hash.substring(1));
                 if(target.closest('#theme-switcher')) this.applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
-                if(target.closest('#reset-data-btn')) { if(confirm("This will erase all your goals for this account. Are you sure?")) {this.state = null; this.saveState(); window.location.reload();} }
-                if(target.closest('#logout-btn')) { logout(); }
                 if(target.closest('#add-goal-btn')) this.openGoalCreationPanel();
-                if(target.closest('#export-btn')) this.openPremiumPanel('export');
+                if(target.closest('#logout-btn')) logout();
                 if(target.closest('.strategy-btn')) this.applySplitterStrategy(target.closest('.strategy-btn').dataset.strategy);
-                if(target.closest('.btn-assign')) { e.stopPropagation(); this.toggleGoalTargetPopup(target.closest('.btn-assign')); }
-                if(target.closest('.assign-popup-item')) this.handleAssignPopupClick(target.closest('.assign-popup-item'));
                 if(target.closest('.panel-close-btn')) this.closeContextPanel();
-                if(target.closest('.get-report-btn')) this.openPremiumPanel('report');
-                if(target.closest('.foundry-card')) this.openFoundryHistoryPanel();
                 if(target.closest('.btn-add-funds')) this.openAddToGoalPanel(target.closest('.btn-add-funds').dataset.goalId);
+                if(target.closest('.goal-menu-btn')) { e.stopPropagation(); this.toggleGoalMenu(target); }
+                if(target.closest('.goal-menu-item')) this.handleGoalAction(target);
+                if(target.closest('#export-btn')) this.openPremiumPanel('export');
+                if(target.closest('.btn-assign-to-foundry')) this.handleSendToFoundry(target);
+                if(target.closest('#close-completion-modal-btn')) this.hideCompletionModal();
+                if(target.closest('#strategy-info-btn')) this.openStrategyInfoPanel();
+
+                if(target.closest('.foundry-add-btn')) this.openAddFundsToFoundryPanel();
+                if(target.closest('.foundry-history-btn')) this.openFoundryHistoryPanel();
+                if(target.closest('.foundry-card') && !target.closest('.foundry-btn')) this.openFoundryUpsell();
+
+                if(!target.closest('.goal-menu-btn')) { document.querySelectorAll('.goal-menu-popup').forEach(p => p.classList.remove('active'));}
             });
             this.DOM.profitSlider.addEventListener('input', e => {
                 const value = parseFloat(e.target.value);
@@ -295,31 +358,23 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             this.DOM.profitSlider.addEventListener('change', () => this.saveState());
             this.DOM.currencyPicker.addEventListener('change', e => this.setCurrency(e.target.value));
-            document.addEventListener('click', e => { if (!e.target.closest('.btn-assign')) document.querySelectorAll('.assign-popup').forEach(p => p.classList.remove('active')); });
         },
-        saveState() {
+        saveState() { 
             currentUser.data = this.state;
             const userIndex = allUsers.findIndex(u => u.username === currentUser.username);
-            if (userIndex !== -1) {
-                allUsers[userIndex] = currentUser;
-            }
+            if (userIndex !== -1) allUsers[userIndex] = currentUser;
             saveAllUsers();
         },
         loadState() {
-            if (currentUser && currentUser.data) {
-                this.state = currentUser.data;
-            } else {
-                // Initialize default state for a new user or a user with no data
-                this.state = { currentPage: 'goals', currency: 'USD', goals: [], splitter: { total: 10000, activeStrategy: 'balanced' } };
-            }
+            if (currentUser && currentUser.data) { this.state = currentUser.data; } 
+            else { this.state = { currentPage: 'goals', currency: 'USD', goals: [], splitter: { total: 10000, activeStrategy: 'balanced' } }; }
             let foundry = this.state.goals.find(g => g.id === 'goal_foundry');
-            if (!foundry) { this.state.goals.unshift({id: 'goal_foundry', name: 'Foundry 🏦', current: 0, target: 1, isPermanent: true, type: 'cash', transactions: []}); }
+            if (!foundry) { this.state.goals.unshift({id: 'goal_foundry', name: 'Foundry 🏭', current: 0, target: 1, isPermanent: true, type: 'cash', transactions: []}); }
             else if (!foundry.transactions) { foundry.transactions = []; }
-            this.saveState();
         },
         navigateTo(pageId) {
             if (pageId === 'studio') { this.openPremiumPanel('studio'); return; }
-            if (!['splitter', 'goals'].includes(pageId)) pageId = 'goals'; // Default to goals
+            if (!['splitter', 'goals'].includes(pageId)) pageId = 'goals';
             this.state.currentPage = pageId;
             this.DOM.pages.forEach(p => p.classList.toggle('active', p.id === pageId));
             this.DOM.navLinks.forEach(l => l.classList.toggle('active', l.hash === `#${pageId}`));
@@ -327,40 +382,50 @@ document.addEventListener('DOMContentLoaded', () => {
         applyTheme(theme) { document.documentElement.dataset.theme = theme; this.DOM.themeSwitcher.textContent = theme === 'dark' ? '☀️' : '🌙'; localStorage.setItem('fsculpt.theme', theme); },
         setCurrency(currencyCode, isInitial = false) { this.state.currency = currencyCode; this.DOM.currencyPicker.value = currencyCode; this.DOM.profitSlider.value = this.state.splitter.total; this.DOM.profitSlider.max = this.config.FREE_SPLITTER_LIMIT; this.DOM.amountDisplay.textContent = this.formatCurrency(this.state.splitter.total); if (!isInitial) { this.saveState(); this.renderAll(); } },
         formatCurrency(a) { try { return new Intl.NumberFormat(undefined, { style: 'currency', currency: this.state.currency, currencyDisplay: 'symbol', maximumFractionDigits: 0 }).format(Math.round(a || 0)).replace(/[A-Z]{2,3}/, '').trim() } catch (e) { return `$${(Math.round(a || 0))}` } },
-        renderWisdomQuote() { const d = Math.floor((new Date - new Date(new Date().getFullYear(), 0, 0)) / 864e5); this.DOM.wisdomContainer.innerHTML = `<em>"${this.config.WISDOM_QUOTES[d % this.config.WISDOM_QUOTES.length]}"</em>`; },
+        renderWisdomQuote() { const d = Math.floor((new Date - new Date(new Date().getFullYear(), 0, 0)) / 864e5); this.DOM.wisdomContainers.forEach(el => el.innerHTML = `<em>"${this.config.WISDOM_QUOTES[d % this.config.WISDOM_QUOTES.length]}"</em>`); },
         renderSplitter() {
             this.DOM.splitterStrategySelector.innerHTML = Object.entries(this.config.SplitterStrategies).map(([k, { name }]) => `<button class="btn strategy-btn ${k === this.state.splitter.activeStrategy ? 'active' : ''}" data-strategy="${k}">${name}</button>`).join('');
             const split = this.config.SplitterStrategies[this.state.splitter.activeStrategy].split;
-            this.DOM.splitterAllocationContainer.innerHTML = `<div class="split-result-card">${Object.entries(this.config.SplitterCategories).map(([k, { title }]) => { const amount = this.state.splitter.total * (split[k] / 100); return `<div class="split-category-row"><span>${title}</span><strong>${this.formatCurrency(amount)}</strong><div style="position:relative;"><button class="btn btn-assign" data-category="${k}" data-amount="${amount}">Assign →</button><div class="assign-popup" id="popup-${k}"></div></div></div>` }).join('')}</div>`;
+            this.DOM.splitterAllocationContainer.innerHTML = `<div class="split-result-card">${Object.entries(this.config.SplitterCategories).map(([k, { title }]) => { const amount = this.state.splitter.total * (split[k] / 100); return `<div class="split-category-row"><span>${title}</span><strong>${this.formatCurrency(amount)}</strong><button class="btn-assign-to-foundry" data-amount="${amount}" data-category="${title}" title="Send to Foundry">🏭</button></div>` }).join('')}</div>`;
         },
         applySplitterStrategy(key) { if (key === 'custom') { this.openPremiumPanel('custom'); return; } this.state.splitter.activeStrategy = key; this.saveState(); this.renderSplitter(); },
-        toggleGoalTargetPopup(button) {
-            const popup = button.nextElementSibling;
-            const allGoals = this.state.goals.filter(g => g.isPermanent || g.current < (g.target || Infinity));
-            popup.innerHTML = allGoals.map(g => `<div class="assign-popup-item" data-goal-id="${g.id}" data-category="${button.dataset.category}" data-amount="${button.dataset.amount}">${g.name}</div>`).join('');
-            document.querySelectorAll('.assign-popup').forEach(p => { if (p !== popup) p.classList.remove('active'); });
-            popup.classList.toggle('active');
+        updateGoalContributions(goal, amount, source) {
+            if(!goal.contributions) goal.contributions = [];
+            goal.contributions.push({amount, source, date: new Date().toISOString()});
         },
-        handleAssignPopupClick(item) { this.assignFundsToGoal(item.dataset.goalId, parseFloat(item.dataset.amount), item.dataset.category); },
         assignFundsToGoal(goalId, amount, source = 'Manual') {
-            const foundry = this.state.goals.find(g => g.id === 'goal_foundry'); const targetGoal = this.state.goals.find(g => g.id === goalId); if (!targetGoal) return;
-            const foundrySpace = this.config.FREE_FOUNDRY_LIMIT - foundry.current;
-            if (foundrySpace <= 0 && (targetGoal.isPermanent || (targetGoal.current + amount > targetGoal.target))) { this.openPremiumPanel('foundry_limit'); return; }
-            if (targetGoal.isPermanent) { const addAmount = Math.min(amount, foundrySpace); targetGoal.current += addAmount; if (addAmount > 0) foundry.transactions.push({ source: `From Splitter - ${source}`, amount: addAmount, date: new Date().toISOString() }); } else {
+            const targetGoal = this.state.goals.find(g => g.id === goalId); if (!targetGoal) return;
+            const wasIncomplete = targetGoal.current < targetGoal.target;
+            
+            if (targetGoal.isPermanent) { targetGoal.current += amount; } 
+            else {
                 const amountNeeded = targetGoal.target - targetGoal.current;
-                if (amount > amountNeeded) { const excess = amount - amountNeeded; const excessToAdd = Math.min(excess, foundrySpace); targetGoal.current = targetGoal.target; if (foundry && excessToAdd > 0) { foundry.current += excessToAdd; foundry.transactions.push({ source: `Excess from ${targetGoal.name}`, amount: excessToAdd, date: new Date().toISOString() }); } } else { targetGoal.current += amount; }
+                if (amount > amountNeeded) {
+                    const excess = amount - amountNeeded;
+                    targetGoal.current = targetGoal.target;
+                    const foundry = this.state.goals.find(g => g.id === 'goal_foundry');
+                    if(foundry) foundry.current += excess;
+                } else { targetGoal.current += amount; }
+                this.updateGoalContributions(targetGoal, amount, source);
             }
             this.saveState(); this.renderAll();
+            const isComplete = targetGoal.current >= targetGoal.target;
+            if (wasIncomplete && isComplete && !targetGoal.isPermanent) { this.showCompletionModal(targetGoal); }
         },
         renderGoals() {
             const userGoals = this.state.goals.filter(g => !g.isPermanent);
             let goalsGridHTML = this.state.goals.map(g => {
-                if (g.isPermanent) { return `<div class="goal-card foundry-card" data-goal-id="${g.id}"><h3>${g.name}</h3><div style="font-size:1.5rem;font-weight:600;margin:0.5rem 0;">${this.formatCurrency(g.current)}</div><p style="font-size:0.8rem;color:var(--subtle-text-color)">Excess funds land here.</p></div>`; }
+                if (g.isPermanent) { return `<div class="goal-card foundry-card" data-goal-id="${g.id}"><div class="foundry-actions"><button class="foundry-btn foundry-add-btn" title="Add Funds">+</button><button class="foundry-btn foundry-history-btn" title="History">📜</button></div><h3>${g.name}</h3><div style="font-size:1.5rem;font-weight:600;margin:0.5rem 0;">${this.formatCurrency(g.current)}</div><p style="font-size:0.8rem;color:var(--subtle-text-color)">Funds stored here before deploying to a Goal.</p></div>`; }
                 const p = g.target > 0 ? (g.current / g.target) * 100 : 0; const isComplete = g.current >= g.target;
-                if (isComplete) { return `<div class="goal-card"><button class="get-report-btn">👑</button><h3>${g.name}</h3><div>${this.formatCurrency(g.current)} / <span style="color:var(--subtle-text-color)">${this.formatCurrency(g.target)}</span></div><div class="goal-completed-message">Congratulations!</div></div>`; } else { return `<div class="goal-card"><button class="btn btn-add-funds" data-goal-id="${g.id}">+</button><h3>${g.name}</h3><div>${this.formatCurrency(g.current)} / <span style="color:var(--subtle-text-color)">${this.formatCurrency(g.target)}</span></div><div class="progress-bar-container"><div style="width:${p}%; height:100%; background: var(--accent-color); border-radius:4px;"></div></div><div class="goal-card-footer"><span>Progress</span><span>${Math.round(p)}%</span></div></div>`; }
+                const menuButton = `<button class="goal-menu-btn" data-goal-id="${g.id}">⋮</button><div class="goal-menu-popup"><div class="goal-menu-item" data-action="edit" data-goal-id="${g.id}">Edit</div><div class="goal-menu-item delete" data-action="delete" data-goal-id="${g.id}">Delete</div></div>`;
+                const addFundsButton = isComplete ? '' : `<button class="btn btn-add-funds" data-goal-id="${g.id}">+</button>`;
+                const iconHTML = g.icon ? `<span class="goal-card-icon">${g.icon}</span>` : '';
+
+                if (isComplete) { return `<div class="goal-card">${menuButton}<h3>${g.name}${iconHTML}</h3><div>${this.formatCurrency(g.current)} / <span style="color:var(--subtle-text-color)">${this.formatCurrency(g.target)}</span></div><div class="goal-completed-message">Completed!</div></div>`; } 
+                else { return `<div class="goal-card">${addFundsButton}${menuButton}<h3>${g.name}${iconHTML}</h3><div>${this.formatCurrency(g.current)} / <span style="color:var(--subtle-text-color)">${this.formatCurrency(g.target)}</span></div><div class="progress-bar-container"><div style="width:${p}%; height:100%; background: var(--accent-color); border-radius:4px;"></div></div><div class="goal-card-footer"><span>Progress</span><span>${Math.round(p)}%</span></div></div>`; }
             }).join('');
             if (userGoals.length === 0) {
-                 goalsGridHTML += `<p style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--subtle-text-color)">Click 'New Goal' to begin your journey!</p>`;
+                 goalsGridHTML += `<p style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--subtle-text-color)">Click 'New Goal' to start crafting your vision!</p>`;
             }
             this.DOM.goalsGrid.innerHTML = goalsGridHTML;
         },
@@ -368,41 +433,144 @@ document.addEventListener('DOMContentLoaded', () => {
         closeContextPanel() { this.DOM.contextPanel.classList.remove('active'); },
         openGoalCreationPanel() {
             if (this.state.goals.filter(g => !g.isPermanent).length >= this.config.MAX_FREE_GOALS) { this.openPremiumPanel('goals'); return; }
-            const chooserHTML = `<h2 style="font-family: var(--font-family-heading); margin-bottom: 1.5rem;">Choose Your Next Financial Goal</h2><div class="modal-section-header">Standard Goals</div><div id="goal-selector-grid">${this.config.GoalTemplates.free.map(t => `<button class="goal-template-btn" data-id="${t.id}"><span class="icon">${t.icon}</span><span>${t.name}</span></button>`).join('')}</div><div class="modal-section-header" style="margin-top:2rem">Premium Collection</div><div style="background-color: var(--input-bg); border-radius: var(--border-radius-md); padding: 1rem; text-align: center; opacity: 0.7; cursor: pointer;" onclick="App.openPremiumPanel('goals_collection')"><div style="filter: blur(4px); margin-bottom: 0.5rem;"><span>🚀🎓✈️</span></div><span>👑 Upgrade to Unlock</span></div>`;
+            const chooserHTML = `<h2 style="font-family: var(--font-family-heading); margin-bottom: 1.5rem;">Choose Your Next Financial Goal</h2><div class="modal-section-header">Standard Goals</div><div id="goal-selector-grid">${this.config.GoalTemplates.free.map(t => `<button class="goal-template-btn" data-id="${t.id}"><span class="icon">${t.icon}</span><span>${t.name}</span></button>`).join('')}</div><div class="modal-section-header" style="margin-top:2rem">Premium Collection</div><div style="background-color: var(--input-bg); border-radius: var(--border-radius-md); padding: 1rem; text-align: center; opacity: 0.7; cursor: pointer;" onclick="App.openPremiumPanel('goals_collection')"><div style="filter: blur(4px); margin-bottom: 0.5rem;"><span>🚀🎓✈️</span></div><span>🎖️ Upgrade to Unlock</span></div>`;
             this.openContextPanel(chooserHTML);
             document.getElementById('goal-selector-grid').addEventListener('click', e => { const b = e.target.closest('.goal-template-btn'); if (b) this.showGoalFormInPanel(b.dataset.id); });
         },
-        showGoalFormInPanel(templateId) {
-            const t = this.config.GoalTemplates.free.find(t => t.id === templateId);
-            const presets = this.config.PRESET_AMOUNTS.map(a => `<button type="button" class="btn btn-preset" data-amount="${a}">${a / 1000}k</button>`).join('');
-            const typeSelector = t.type === 'custom' ? `<div class="input-group"><label>Goal Type</label><select id="goal-type"><option value="cash">Cash</option><option value="savings" selected>Savings</option><option value="investments">Investments</option></select></div>` : '';
-            const formHTML = `<h2 style="font-family: var(--font-family-heading);">Create: ${t.name}</h2><form data-handler="handleGoalFormSubmit"><input type="hidden" id="goal-template-id" value="${t.id}"><input type="hidden" id="goal-type-hidden" value="${t.type}">${typeSelector}<div class="input-group"><label>Goal Name</label><input type="text" id="goal-name" required value="${t.id === 'custom' ? '' : t.name}"></div><div class="input-group"><label>Target Amount</label><input type="number" id="target-amount" required max="${this.config.FREE_GOAL_LIMIT}"><div class="preset-amounts">${presets}</div></div><div class="modal-actions"><button type="button" class="btn btn-secondary" id="back-to-templates-btn">Back</button><button type="submit" class="btn btn-primary">Create</button></div></form>`;
+        showGoalFormInPanel(templateId, existingGoal = null) {
+            const isEdit = existingGoal !== null;
+            const t = this.config.GoalTemplates.free.find(t => t.id === (isEdit ? existingGoal.templateId : templateId)) || this.config.GoalTemplates.free.find(t=>t.id==='custom');
+            const presets = this.config.PRESET_AMOUNTS.map(a => `<button type="button" class="btn-preset" data-amount="${a}">${a / 1000}k</button>`).join('');
+            const typeSelector = `<div class="input-group"><label>Goal Type</label><select id="goal-type"><option value="Short Term">Short Term</option><option value="Long Term">Long Term</option></select></div>`;
+            const iconSelector = `<div class="input-group"><label>Icon</label><div class="icon-selector">${this.config.GOAL_ICONS.map(i => `<button type="button" class="icon-btn" data-icon="${i}">${i}</button>`).join('')}</div></div>`;
+            const formHTML = `<h2 style="font-family: var(--font-family-heading);">${isEdit ? 'Edit Goal' : 'Create: ' + t.name}</h2><form data-handler="handleGoalFormSubmit"><input type="hidden" id="goal-id" value="${isEdit ? existingGoal.id : ''}"><input type="hidden" id="goal-icon-hidden" value="${isEdit ? (existingGoal.icon || '') : ''}"><input type="hidden" id="goal-template-id" value="${t.id}">${iconSelector}${typeSelector}<div class="input-group"><label>Goal Name</label><input type="text" id="goal-name" required value="${isEdit ? existingGoal.name : (t.id === 'custom' ? '' : t.name)}"></div><div class="input-group"><label>Target Amount</label><input type="number" id="target-amount" required value="${isEdit ? existingGoal.target : ''}"><div class="preset-buttons">${presets}</div></div><div class="modal-actions"><button type="submit" class="btn btn-primary">${isEdit ? 'Save Changes' : 'Create'}</button></div></form>`;
             this.openContextPanel(formHTML);
-            document.getElementById('back-to-templates-btn').addEventListener('click', () => this.openGoalCreationPanel());
-            document.querySelector('.preset-amounts').addEventListener('click', e => { if (e.target.matches('.btn-preset')) document.getElementById('target-amount').value = e.target.dataset.amount; });
+            
+            const iconSelectorEl = this.DOM.panelContent.querySelector('.icon-selector');
+            iconSelectorEl.addEventListener('click', e => {
+                if (e.target.matches('.icon-btn')) {
+                    iconSelectorEl.querySelectorAll('.icon-btn').forEach(btn => btn.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                    document.getElementById('goal-icon-hidden').value = e.target.dataset.icon;
+                }
+            });
+
+            if(isEdit) {
+                document.getElementById('goal-type').value = existingGoal.type;
+                if (existingGoal.icon) {
+                    const selectedIcon = iconSelectorEl.querySelector(`[data-icon="${existingGoal.icon}"]`);
+                    if(selectedIcon) selectedIcon.classList.add('selected');
+                }
+            } else if (t.type !== 'custom') { document.getElementById('goal-type').value = t.type; }
+
+            document.querySelector('.preset-buttons').addEventListener('click', e => { if (e.target.matches('.btn-preset')) document.getElementById('target-amount').value = e.target.dataset.amount; });
         },
         handleGoalFormSubmit(form) {
-            const targetAmount = parseFloat(form.querySelector('#target-amount').value); if (targetAmount > this.config.FREE_GOAL_LIMIT) { this.openPremiumPanel('goal_limit'); return; }
-            const templateId = form.querySelector('#goal-template-id').value; const goalType = templateId === 'custom' ? form.querySelector('#goal-type').value : form.querySelector('#goal-type-hidden').value;
-            const newGoal = { id: `goal_${Date.now()}`, templateId, name: form.querySelector('#goal-name').value, target: targetAmount, current: 0, type: goalType };
-            this.state.goals.push(newGoal); this.saveState(); this.renderAll(); this.closeContextPanel();
-        },
-        openAddToGoalPanel(goalId) {
-            const foundry = this.state.goals.find(g => g.isPermanent);
-            const content = `<h2 style="font-family: var(--font-family-heading);">Add Funds</h2><div style="margin: 1.5rem 0;"><h3 style="font-size:1rem; margin-bottom:1rem;">Add Manually</h3><form data-handler="handleManualAddSubmit"><input type="hidden" name="goalId" value="${goalId}"><div class="input-group"><input type="number" name="amount" placeholder="Enter amount" required></div><button type="submit" class="btn btn-secondary modal-actions-btn" style="width:100%;">Add Manual Funds</button></form></div><div style="margin-top: 2rem;"><h3 style="font-size:1rem; margin-bottom:1rem;">Add from Foundry (${this.formatCurrency(foundry.current)} available)</h3>${foundry.current > 0 ? `<form data-handler="handleAddToGoalSubmit"><input type="hidden" name="goalId" value="${goalId}"><div class="input-group"><div class="amount-input-wrapper"><input type="number" name="amount" max="${foundry.current}" required><button type="button" class="btn-max">Max</button></div></div><button type="submit" class="btn btn-primary modal-actions-btn" style="width:100%;">Add from Foundry</button></form>` : `<p style="font-size:0.9rem; color:var(--subtle-text-color);">Your Foundry is empty. Use the Splitter to add funds.</p>`}</div>`;
-            this.openContextPanel(content);
-            if (foundry.current > 0) { const maxBtn = document.querySelector('.btn-max'); const amountInput = document.querySelector('form[data-handler="handleAddToGoalSubmit"] input[name="amount"]'); const targetGoal = this.state.goals.find(g => g.id === goalId); const maxAmount = Math.min(foundry.current, targetGoal.target - targetGoal.current); maxBtn.addEventListener('click', () => { amountInput.value = Math.floor(maxAmount); }); }
-        },
-        handleManualAddSubmit(form) {
-            const amount = parseFloat(form.elements.amount.value); const goalId = form.elements.goalId.value; const targetGoal = this.state.goals.find(g => g.id === goalId);
-            if (targetGoal && amount > 0) { const amountNeeded = targetGoal.target - targetGoal.current; if (amount > amountNeeded) { const excess = amount - amountNeeded; targetGoal.current = targetGoal.target; this.assignFundsToGoal('goal_foundry', excess, `Manual add to ${targetGoal.name}`); } else { targetGoal.current += amount; } }
+            const goalId = form.querySelector('#goal-id').value;
+            const targetAmount = parseFloat(form.querySelector('#target-amount').value);
+            const goalName = form.querySelector('#goal-name').value;
+            const templateId = form.querySelector('#goal-template-id').value;
+            const goalType = form.querySelector('#goal-type').value;
+            const goalIcon = form.querySelector('#goal-icon-hidden').value;
+            if (goalId) { // Editing
+                const goalIndex = this.state.goals.findIndex(g => g.id === goalId);
+                if (goalIndex > -1) { Object.assign(this.state.goals[goalIndex], {name: goalName, target: targetAmount, type: goalType, icon: goalIcon}); }
+            } else { // Creating
+                this.state.goals.push({ id: `goal_${Date.now()}`, templateId, name: goalName, target: targetAmount, current: 0, type: goalType, icon: goalIcon, contributions: [] });
+            }
             this.saveState(); this.renderAll(); this.closeContextPanel();
         },
+        openAddToGoalPanel(goalId) {
+            const foundry = this.state.goals.find(g => g.id === 'goal_foundry');
+            const content = `<h2 style="font-family: var(--font-family-heading);">Add Funds to Goal</h2><h3 style="font-size:1rem; margin-bottom:1rem; margin-top: 1.5rem;">From Foundry (${this.formatCurrency(foundry.current)} available)</h3>${foundry.current > 0 ? `<form data-handler="handleAddToGoalSubmit"><input type="hidden" name="goalId" value="${goalId}"><div class="input-group"><div class="amount-input-wrapper"><input type="number" name="amount" max="${foundry.current}" required><button type="button" class="btn-max-vis">Max</button></div><div class="percentage-buttons"><button type="button" class="btn-percentage" data-percent="0.1">10%</button><button type="button" class="btn-percentage" data-percent="0.25">25%</button><button type="button" class="btn-percentage" data-percent="0.5">50%</button><button type="button" class="btn-percentage" data-percent="1">100%</button></div></div><button type="submit" class="btn btn-primary" style="width:100%; padding:0.8rem;">Add from Foundry</button></form>` : `<p style="font-size:0.9rem; color:var(--subtle-text-color);">Your Foundry is empty. Use the Splitter to add funds.</p>`}`;
+            this.openContextPanel(content);
+            if (foundry.current > 0) {
+                const amountInput = this.DOM.panelContent.querySelector('input[name="amount"]');
+                const targetGoal = this.state.goals.find(g => g.id === goalId);
+                const maxAmount = Math.min(foundry.current, targetGoal.target - targetGoal.current);
+                this.DOM.panelContent.querySelector('.btn-max-vis').addEventListener('click', () => { amountInput.value = Math.floor(maxAmount); });
+                this.DOM.panelContent.querySelectorAll('.btn-percentage').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const percent = parseFloat(btn.dataset.percent);
+                        amountInput.value = Math.floor(foundry.current * percent);
+                    });
+                });
+            }
+        },
         handleAddToGoalSubmit(form) {
-            const foundry = this.state.goals.find(g => g.isPermanent); const amount = parseFloat(form.elements.amount.value); const goalId = form.elements.goalId.value;
+            const foundry = this.state.goals.find(g => g.id === 'goal_foundry'); const amount = parseFloat(form.elements.amount.value); const goalId = form.elements.goalId.value;
             if (amount > foundry.current || amount <= 0) { alert("Invalid amount."); return; }
             foundry.current -= amount; this.assignFundsToGoal(goalId, amount, 'Foundry Transfer');
             this.saveState(); this.renderGoals(); this.closeContextPanel();
+        },
+        openFoundryUpsell() {
+            const content = `<h2 style="font-family: var(--font-family-heading);">The Foundry 🏭</h2><p style="margin: 1rem 0; line-height: 1.6;">The Foundry is your personal treasury, where funds are placed to be put to work. It's a core part of the Strategy Studio.</p><button class="btn btn-primary" disabled style="width:100%;">Upgrade (Coming Soon)</button>`;
+            this.openContextPanel(content);
+        },
+        openPremiumPanel(feature) {
+            const titles = { 'export': 'Export 🎖️', 'custom': 'Custom Strategies 🎖️', 'studio': 'Strategy Studio 🎖️', 'gallery': 'The Gallery 🎖️', 'goals': 'Unlimited Goals 🎖️', 'splitter_limit': 'Higher Limits 🎖️', 'foundry_limit': 'Unlimited Foundry 🎖️' };
+            const messages = { 'export': 'Export your goal history to a CSV file.', 'custom': 'Full control over your allocation is a premium feature.', 'studio': 'Advanced portfolio & financial planning tools, including the six-category allocation workshop, are part of our premium offering.', 'gallery': 'Archive your completed masterpieces in the Gallery. A premium feature to celebrate your achievements.', 'goals': 'Create more than 2 goals with Premium.', 'splitter_limit': `Split amounts over ${this.formatCurrency(this.config.FREE_SPLITTER_LIMIT)} with Premium.`, 'foundry_limit': `Store more than ${this.formatCurrency(this.config.FREE_FOUNDRY_LIMIT)} in your Foundry with Premium.` };
+            const content = ` <h2 style="font-family: var(--font-family-heading); text-align:center;">${titles[feature] || 'Premium Feature 🎖️'}</h2> <p style="text-align:center; margin: 1rem 0;">${messages[feature] || 'Upgrade to unlock more power.'} Coming soon!</p> <button class="btn btn-primary" disabled style="width:100%;">Upgrade (Coming Soon)</button> `;
+            this.openContextPanel(content);
+        },
+        toggleGoalMenu(button) {
+            const popup = button.nextElementSibling;
+            document.querySelectorAll('.goal-menu-popup').forEach(p => { if (p !== popup) p.classList.remove('active'); });
+            popup.classList.toggle('active');
+        },
+        handleGoalAction(target) {
+            const action = target.dataset.action; const goalId = target.dataset.goalId;
+            if (action === 'edit') { const goal = this.state.goals.find(g => g.id === goalId); if(goal) this.showGoalFormInPanel(goal.templateId, goal); } 
+            else if (action === 'delete') { if(confirm("Are you sure you want to delete this Goal?")) { this.state.goals = this.state.goals.filter(g => g.id !== goalId); this.saveState(); this.renderGoals(); } }
+            document.querySelectorAll('.goal-menu-popup').forEach(p => p.classList.remove('active'));
+        },
+        showCompletionModal(goal) {
+            const contributions = goal.contributions || [];
+            const totalContributions = contributions.length;
+            const avgContribution = totalContributions > 0 ? goal.target / totalContributions : 0;
+            const contentHTML = `<h2>Goal Complete!</h2><div class="completion-summary-grid"><div class="summary-item"><div class="label">Goal Name</div><div class="value">${goal.name}</div></div><div class="summary-item"><div class="label">Final Amount</div><div class="value">${this.formatCurrency(goal.target)}</div></div><div class="summary-item"><div class="label">Total Contributions</div><div class="value">${totalContributions}</div></div><div class="summary-item"><div class="label">Avg. Contribution</div><div class="value">${this.formatCurrency(avgContribution)}</div></div></div><p>Every masterpiece begins with a single vision. What will you sculpt next?</p><div style="display: flex; flex-direction: column; gap: 0.75rem;"><button id="close-completion-modal-btn" class="btn btn-primary">Continue Sculpting</button></div>`;
+            this.DOM.completionContentWrapper.innerHTML = contentHTML;
+            this.DOM.completionModal.style.display = 'flex';
+        },
+        hideCompletionModal() { this.DOM.completionModal.style.display = 'none'; },
+        handleSendToFoundry(button) {
+            const amount = parseFloat(button.dataset.amount);
+            const category = button.dataset.category;
+            const foundry = this.state.goals.find(g => g.id === 'goal_foundry');
+
+            if (foundry.current + amount > this.config.FREE_FOUNDRY_LIMIT) {
+                this.openPremiumPanel('foundry_limit');
+                return;
+            }
+
+            if (confirm(`Confirm you want to send ${this.formatCurrency(amount)} from ${category} to your Foundry?`)) {
+                foundry.current += amount;
+                foundry.transactions.push({ source: `From Splitter - ${category}`, amount: amount, date: new Date().toISOString() });
+                this.saveState();
+                this.renderGoals();
+                this.showSuccessModal(`Successfully sent ${this.formatCurrency(amount)} to the Foundry.`);
+            }
+        },
+        openAddFundsToFoundryPanel() {
+            const content = `<h2 style="font-family: var(--font-family-heading);">Add to Foundry</h2><form data-handler="handleManualAddFoundrySubmit"><div class="input-group" style="margin-top: 1.5rem;"><label>Amount</label><input type="number" name="amount" required></div><button type="submit" class="btn btn-primary" style="width:100%;">Add Funds</button></form>`;
+            this.openContextPanel(content);
+        },
+        handleManualAddFoundrySubmit(form) {
+            const amount = parseFloat(form.elements.amount.value);
+            const foundry = this.state.goals.find(g => g.id === 'goal_foundry');
+
+            if (foundry.current + amount > this.config.FREE_FOUNDRY_LIMIT) {
+                this.openPremiumPanel('foundry_limit');
+                return;
+            }
+
+            if (amount > 0) {
+                foundry.current += amount;
+                foundry.transactions.push({ source: 'Manual Deposit', amount: amount, date: new Date().toISOString() });
+                this.saveState();
+                this.renderGoals();
+                this.closeContextPanel();
+            }
         },
         openFoundryHistoryPanel() {
             const foundry = this.state.goals.find(g => g.id === 'goal_foundry'); if (!foundry) return;
@@ -410,13 +578,54 @@ document.addEventListener('DOMContentLoaded', () => {
             const content = `<h2 style="font-family: var(--font-family-heading);">Foundry History</h2><div style="margin-top:1.5rem;">${historyItems.length > 0 ? historyItems : '<p>No transactions yet.</p>'}</div>`;
             this.openContextPanel(content);
         },
-        openPremiumPanel(feature) {
-            const titles = { 'custom': 'Custom Strategies 👑', 'studio': 'Strategy Studio 👑', 'export': 'Export 👑', 'goals': 'Unlimited Goals 👑', 'report': 'Get Report 👑', 'splitter_limit': 'Higher Limits 👑', 'goal_limit': 'Higher Limits 👑', 'foundry_limit': 'Unlimited Foundry 👑', 'goals_collection': 'Premium Collection 👑' };
-            const messages = { 'custom': 'Full control over your allocation is a premium feature.', 'studio': 'Advanced portfolio & financial planning tools, including the six-category allocation workshop, are part of our premium offering.', 'export': 'Export your goal history to a CSV file.', 'goals': 'Create more than 2 goals with Premium.', 'report': 'Unlock detailed reports and insights on your completed goals.', 'splitter_limit': `Split amounts over ${this.formatCurrency(this.config.FREE_SPLITTER_LIMIT)} with Premium.`, 'goal_limit': `Create goals over ${this.formatCurrency(this.config.FREE_GOAL_LIMIT)} with Premium.`, 'foundry_limit': `Store more than ${this.formatCurrency(this.config.FREE_FOUNDRY_LIMIT)} in your Foundry with Premium.`, 'goals_collection': 'Unlock specialized goal templates like New Business, Travel, and more.' };
-            const content = ` <h2 style="font-family: var(--font-family-heading); text-align:center;">${titles[feature] || 'Premium Feature 👑'}</h2> <p style="text-align:center; margin: 1rem 0;">${messages[feature] || 'Upgrade to unlock more power.'} Coming soon!</p> <button class="btn btn-primary" disabled style="width:100%;">Upgrade (Coming Soon)</button> `;
+        showSuccessModal(message) {
+            this.DOM.successMessage.textContent = message;
+            this.DOM.successModal.style.display = 'flex';
+            setTimeout(() => this.hideSuccessModal(), 2500);
+        },
+        hideSuccessModal() {
+            this.DOM.successModal.style.display = 'none';
+        },
+        openStrategyInfoPanel() {
+            const content = `
+                <h2 style="font-family: var(--font-family-heading);">Strategy Guide</h2>
+                <div class="info-tabs">
+                    <button class="info-tab active" data-tab="classic">Classic</button>
+                    <button class="info-tab" data-tab="balanced">Balanced</button>
+                    <button class="info-tab" data-tab="growth">Growth</button>
+                </div>
+                <div id="info-classic" class="info-content active">
+                    <h4>The Classic 🛡️</h4>
+                    <p><strong>Philosophy:</strong> Prioritizes immediate liquidity and safety. A conservative approach for those who want a strong cash position.</p>
+                    <p style="margin-top: 1rem;"><strong>Suited For:</strong> Freelancers with variable income, individuals building an emergency fund, or those with a low risk tolerance.</p>
+                </div>
+                <div id="info-balanced" class="info-content">
+                    <h4>The Balanced ⚖️</h4>
+                    <p><strong>Philosophy:</strong> A moderate approach that evenly weighs cash access, steady savings, and long-term growth.</p>
+                    <p style="margin-top: 1rem;"><strong>Suited For:</strong> The steady professional, couples planning for medium-term goals like a house, or anyone seeking a versatile, all-weather strategy.</p>
+                </div>
+                <div id="info-growth" class="info-content">
+                    <h4>The Growth 🚀</h4>
+                    <p><strong>Philosophy:</strong> Aggressively prioritizes investments to maximize long-term wealth creation, accepting higher short-term volatility.</p>
+                    <p style="margin-top: 1rem;"><strong>Suited For:</strong> Young professionals with a long time horizon, experienced investors, or anyone focused on ambitious, long-range goals like early retirement.</p>
+                </div>
+            `;
             this.openContextPanel(content);
+            
+            const tabs = this.DOM.panelContent.querySelectorAll('.info-tab');
+            const contents = this.DOM.panelContent.querySelectorAll('.info-content');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    this.DOM.panelContent.querySelector(`#info-${tab.dataset.tab}`).classList.add('active');
+                });
+            });
         }
     };
+    
+    App.init();
     window.App = App;
 });
 </script>
