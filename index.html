@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentUser && currentUser.data) { this.state = currentUser.data; } 
             else { this.state = { currentPage: 'goals', currency: 'USD', goals: [], splitter: { total: 10000, activeStrategy: 'balanced' } }; }
             let foundry = this.state.goals.find(g => g.id === 'goal_foundry');
-            if (!foundry) { this.state.goals.unshift({id: 'goal_foundry', name: 'Foundry 🏭', current: 0, target: 1, isPermanent: true, type: 'cash', transactions: []}); }
+            if (!foundry) { this.state.goals.unshift({id: 'goal_foundry', name: 'Foundry 🏯', current: 0, target: 1, isPermanent: true, type: 'cash', transactions: []}); }
             else if (!foundry.transactions) { foundry.transactions = []; }
         },
         navigateTo(pageId) {
@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSplitter() {
             this.DOM.splitterStrategySelector.innerHTML = Object.entries(this.config.SplitterStrategies).map(([k, { name }]) => `<button class="btn strategy-btn ${k === this.state.splitter.activeStrategy ? 'active' : ''}" data-strategy="${k}">${name}</button>`).join('');
             const split = this.config.SplitterStrategies[this.state.splitter.activeStrategy].split;
-            this.DOM.splitterAllocationContainer.innerHTML = `<div class="split-result-card">${Object.entries(this.config.SplitterCategories).map(([k, { title }]) => { const amount = this.state.splitter.total * (split[k] / 100); return `<div class="split-category-row"><span>${title}</span><strong>${this.formatCurrency(amount)}</strong><button class="btn-assign-to-foundry" data-amount="${amount}" data-category="${title}" title="Send to Foundry">🏭</button></div>` }).join('')}</div>`;
+            this.DOM.splitterAllocationContainer.innerHTML = `<div class="split-result-card">${Object.entries(this.config.SplitterCategories).map(([k, { title }]) => { const amount = this.state.splitter.total * (split[k] / 100); return `<div class="split-category-row"><span>${title}</span><strong>${this.formatCurrency(amount)}</strong><button class="btn-assign-to-foundry" data-amount="${amount}" data-category="${title}" title="Send to Foundry">🏯</button></div>` }).join('')}</div>`;
         },
         applySplitterStrategy(key) { if (key === 'custom') { this.openPremiumPanel('custom'); return; } this.state.splitter.activeStrategy = key; this.saveState(); this.renderSplitter(); },
         updateGoalContributions(goal, amount, source) {
@@ -504,7 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.saveState(); this.renderGoals(); this.closeContextPanel();
         },
         openFoundryUpsell() {
-            const content = `<h2 style="font-family: var(--font-family-heading);">The Foundry 🏭</h2><p style="margin: 1rem 0; line-height: 1.6;">The Foundry is your personal treasury, where funds are placed to be put to work. It's a core part of the Strategy Studio.</p><button class="btn btn-primary" disabled style="width:100%;">Upgrade (Coming Soon)</button>`;
+            const content = `<h2 style="font-family: var(--font-family-heading);">The Foundry 🏯</h2><p style="margin: 1rem 0; line-height: 1.6;">The Foundry is your personal treasury, where funds are placed to be put to work. It's a core part of the Strategy Studio.</p><button class="btn btn-primary" disabled style="width:100%;">Upgrade (Coming Soon)</button>`;
             this.openContextPanel(content);
         },
         openPremiumPanel(feature) {
