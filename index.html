@@ -44,7 +44,7 @@
         nav a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background-color: var(--accent-color); transform: scaleX(0); transform-origin: bottom right; transition: transform 0.25s ease-out; }
         nav a:hover::after { transform: scaleX(1); transform-origin: bottom left; }
         .premium-nav-link::after { content: '🎖️'; font-size: 0.7em; margin-left: 0.25rem; }
-        .header-right { display: flex; align-items: center; gap: 1rem; }
+        .header-right { display: flex; align-items: flex-start; gap: 1rem; }
         .user-area { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem;}
         #user-greeting { font-size: 0.8rem; color: var(--subtle-text-color); }
         .currency-selector-wrapper { position: relative; }
@@ -67,8 +67,10 @@
         .strategy-btn { background-color: var(--strategy-btn-inactive-bg); border: 1px solid var(--border-color); color: var(--strategy-btn-inactive-color); padding: 0.6rem 1.1rem; }
         .strategy-btn.active { background-color: var(--accent-color); color: white; border-color: var(--accent-color); }
         .split-result-card { border-radius: var(--border-radius-md); border: 1px solid var(--border-color); margin-top: 2rem; }
-        .split-category-row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 1rem; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); }
+        .split-category-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); }
         .split-category-row:last-child { border-bottom: none; }
+        #secure-all-container { margin-top: 2rem; text-align: center; }
+        #secure-all-btn { padding: 0.8rem 2rem; font-size: 1rem; }
         .wisdom-container { text-align: center; color: var(--subtle-text-color); margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color); }
         .goals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
         .goal-card { position: relative; background: var(--card-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; }
@@ -123,8 +125,6 @@
         .transaction-source { font-weight: 600; }
         .transaction-date { font-size: 0.8rem; color: var(--subtle-text-color); }
         .transaction-amount { font-weight: 600; color: var(--success-color); font-size: 1rem;}
-        .btn-assign-to-foundry { background-color: var(--input-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); color: var(--text-color); padding: 0.5rem 0.8rem; font-size: 1.2rem; cursor: pointer; transition: all 0.2s ease;}
-        .btn-assign-to-foundry:hover { background-color: var(--accent-color); color: white; }
         
         /* Icon Selector Styles */
         .icon-selector { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.updateWelcomeMessage();
         },
         cacheDom() {
-            const headerHTML = `<div class="header-left"><a href="#goals" class="app-logo"><span class="app-logomark">FS</span><span>Financial Sculptor</span></a><nav><a href="#splitter" class="nav-link">Splitter</a><a href="#goals" class="nav-link active">Strategy</a><a href="#studio" class="nav-link premium-nav-link">Studio</a></nav></div><div class="header-right"><div class="currency-selector-wrapper"><select id="currency-picker"><option value="USD">$ USD</option><option value="GBP">£ GBP</option><option value="EUR">€ EUR</option></select></div><button id="theme-switcher" class="theme-switcher">☀️</button><div class="user-area" style="margin-left: 1rem;"><div id="user-greeting"></div><button id="logout-btn" class="btn btn-secondary btn-header">Logout</button></div></div>`;
+            const headerHTML = `<div class="header-left"><a href="#goals" class="app-logo"><span class="app-logomark">FS</span> Financial Sculptor</a><nav><a href="#splitter" class="nav-link">Splitter</a><a href="#goals" class="nav-link active">Strategy</a><a href="#studio" class="nav-link premium-nav-link">Studio</a></nav></div><div class="header-right"><div class="currency-selector-wrapper"><select id="currency-picker"><option value="USD">$ USD</option><option value="GBP">£ GBP</option><option value="EUR">€ EUR</option></select></div><button id="theme-switcher" class="theme-switcher">☀️</button><div class="user-area" style="margin-left: 1rem;"><div id="user-greeting"></div><button id="logout-btn" class="btn btn-secondary btn-header">Logout</button></div></div>`;
             document.querySelector('header').innerHTML = headerHTML;
             this.DOM = {
                 mainContent: document.getElementById('main-content'), contextPanel: document.getElementById('context-panel'), panelContent: document.getElementById('panel-content'), navLinks: document.querySelectorAll('nav a'), pages: document.querySelectorAll('.page-section'), currencyPicker: document.getElementById('currency-picker'), themeSwitcher: document.getElementById('theme-switcher'), profitSlider: document.getElementById('profit-slider'), amountDisplay: document.getElementById('amount-display'), splitterStrategySelector: document.getElementById('splitter-strategy-selector'), splitterAllocationContainer: document.getElementById('splitter-allocation-container'), goalsGrid: document.getElementById('goals-grid-container'), wisdomContainers: document.querySelectorAll('.wisdom-container'),
@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(target.closest('.goal-menu-btn')) { e.stopPropagation(); this.toggleGoalMenu(target); }
                 if(target.closest('.goal-menu-item')) this.handleGoalAction(target);
                 if(target.closest('#export-btn')) this.openPremiumPanel('export');
-                if(target.closest('.btn-assign-to-foundry')) this.handleSendToFoundry(target);
+                if(target.closest('#secure-all-btn')) this.handleSecureAll();
                 if(target.closest('#close-completion-modal-btn')) this.hideCompletionModal();
                 if(target.closest('#strategy-info-btn')) this.openStrategyInfoPanel();
                 if(target.closest('#start-forging-btn')) {
@@ -415,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             this.DOM.pageTitle.addEventListener('blur', (e) => {
                 let newTitle = e.target.textContent.trim().substring(0, 13);
-                if (!newTitle) newTitle = "Strategy";
+                if (!newTitle) newTitle = `${currentUser.username}'s Foundry`;
                 e.target.textContent = newTitle;
                 this.state.pageTitle = newTitle;
                 this.saveState();
@@ -444,9 +444,18 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         loadState() {
             if (currentUser && currentUser.data) { this.state = currentUser.data; } 
-            else { this.state = { currentPage: 'goals', pageTitle: 'Strategy', currency: 'USD', goals: [], splitter: { total: 10000, activeStrategy: 'balanced' }, lastLogin: new Date().toISOString() }; }
+            else { 
+                this.state = { 
+                    currentPage: 'splitter', 
+                    pageTitle: `${currentUser.username}'s Foundry`, 
+                    currency: 'USD', 
+                    goals: [], 
+                    splitter: { total: 10000, activeStrategy: 'balanced' }, 
+                    lastLogin: new Date().toISOString() 
+                }; 
+            }
             
-            this.DOM.pageTitle.textContent = this.state.pageTitle || 'Strategy';
+            this.DOM.pageTitle.textContent = this.state.pageTitle || `${currentUser.username}'s Foundry`;
 
             let foundry = this.state.goals.find(g => g.id === 'goal_foundry');
             if (!foundry) { this.state.goals.unshift({id: 'goal_foundry', name: 'Foundry 🏯', current: 0, target: 1, isPermanent: true, type: 'cash', transactions: []}); }
@@ -457,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         navigateTo(pageId) {
             if (pageId === 'studio') { this.openPremiumPanel('studio'); return; }
-            if (!['splitter', 'goals'].includes(pageId)) pageId = 'goals';
+            if (!['splitter', 'goals'].includes(pageId)) pageId = 'splitter';
             this.state.currentPage = pageId;
             this.DOM.pages.forEach(p => p.classList.toggle('active', p.id === pageId));
             this.DOM.navLinks.forEach(l => l.classList.toggle('active', l.hash === `#${pageId}`));
@@ -469,7 +478,9 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSplitter() {
             this.DOM.splitterStrategySelector.innerHTML = Object.entries(this.config.SplitterStrategies).map(([k, { name }]) => `<button class="btn strategy-btn ${k === this.state.splitter.activeStrategy ? 'active' : ''}" data-strategy="${k}">${name}</button>`).join('');
             const split = this.config.SplitterStrategies[this.state.splitter.activeStrategy].split;
-            this.DOM.splitterAllocationContainer.innerHTML = `<div class="split-result-card">${Object.entries(this.config.SplitterCategories).map(([k, { title }]) => { const amount = this.state.splitter.total * (split[k] / 100); return `<div class="split-category-row"><span>${title}</span><strong>${this.formatCurrency(amount)}</strong><button class="btn-assign-to-foundry" data-amount="${amount}" data-category="${title}" title="Secure in Foundry">🏯</button></div>` }).join('')}</div>`;
+            let allocationHTML = `<div class="split-result-card">${Object.entries(this.config.SplitterCategories).map(([k, { title }]) => { const amount = this.state.splitter.total * (split[k] / 100); return `<div class="split-category-row"><span>${title}</span><strong>${this.formatCurrency(amount)}</strong></div>` }).join('')}</div>`;
+            allocationHTML += `<div id="secure-all-container"><button id="secure-all-btn" class="btn btn-primary">Secure All In Foundry</button></div>`;
+            this.DOM.splitterAllocationContainer.innerHTML = allocationHTML;
         },
         applySplitterStrategy(key) { if (key === 'custom') { this.openPremiumPanel('custom'); return; } this.state.splitter.activeStrategy = key; this.saveState(); this.renderSplitter(); },
         assignFundsToGoal(goalId, amount, source = 'Manual') {
@@ -718,24 +729,29 @@ document.addEventListener('DOMContentLoaded', () => {
             this.DOM.completionModal.style.display = 'flex';
         },
         hideCompletionModal() { this.DOM.completionModal.style.display = 'none'; },
-        handleSendToFoundry(button) {
-            const amount = parseFloat(button.dataset.amount);
-            const category = button.dataset.category;
-            const foundry = this.state.goals.find(g => g.id === 'goal_foundry');
+        handleSecureAll() {
+            const amount = this.state.splitter.total;
+            if (amount <= 0) return;
 
+            const foundry = this.state.goals.find(g => g.id === 'goal_foundry');
             if (foundry.current + amount > this.config.FREE_FOUNDRY_LIMIT) {
                 this.openPremiumPanel('foundry_limit');
                 return;
             }
 
-            if (confirm(`Confirm you want to secure ${this.formatCurrency(amount)} from ${category} in your Foundry?`)) {
-                foundry.current += amount;
-                foundry.transactions.push({ source: `From Splitter - ${category}`, amount: amount, date: new Date().toISOString() });
-                this.state.foundryJustFundedTimestamp = new Date().toISOString();
-                this.saveState();
-                this.renderGoals();
-                this.showSuccessModal(`Successfully secured ${this.formatCurrency(amount)} in the Foundry.`);
-            }
+            foundry.current += amount;
+            foundry.transactions.push({ source: `From Splitter`, amount: amount, date: new Date().toISOString() });
+            this.state.foundryJustFundedTimestamp = new Date().toISOString();
+            
+            this.state.splitter.total = 0;
+            this.DOM.profitSlider.value = 0;
+            this.DOM.amountDisplay.textContent = this.formatCurrency(0);
+
+            this.saveState();
+            this.renderSplitter();
+            this.renderGoals();
+            this.showSuccessModal(`Successfully secured ${this.formatCurrency(amount)} in the Foundry.`);
+            this.navigateTo('goals');
         },
         openAddFundsToFoundryPanel() {
             const content = `<h2 style="font-family: var(--font-family-heading);">Add to Foundry</h2><form data-handler="handleManualAddFoundrySubmit"><div class="input-group" style="margin-top: 1.5rem;"><label>Amount</label><input type="number" name="amount" required></div><button type="submit" class="btn btn-primary" style="width:100%;">Add to Foundry</button></form>`;
