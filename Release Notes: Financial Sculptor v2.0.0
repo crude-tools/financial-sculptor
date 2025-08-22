@@ -1,0 +1,96 @@
+**Release Notes: Financial Sculptor v2.0.0**
+
+#### **1.0 Summary**
+
+This is a major architectural and functional update, transitioning the Financial Sculptor from a stateless, single-purpose calculator (v1.0) into a stateful, user-centric web application (v2.0). The update introduces a full user authentication layer, data persistence, and a complete overhaul of the core user journey to be more intuitive and strategically sound.
+
+---
+
+#### **2.0 ✨ New Features**
+
+- **User Authentication Module:**
+    
+    - Implemented a full client-side authentication system featuring **Sign Up, Login, and Logout** functionality.
+        
+    - User credentials and session status are managed securely within the application.
+        
+- **Data Persistence Layer:**
+    
+    - All user-generated data, including Goals (Visions), Foundry balance, and user settings, is now persisted client-side in the browser's localStorage. This transforms the tool into a persistent, single-user application.
+        
+- **Full Goal (Vision) CRUD Functionality:**
+    
+    - The Goal entity is no longer static. Users can now perform full **Create, Read, Update, and Delete** operations on their goals via the UI.
+        
+    - An "Edit" function has been added to each goal card, accessible via a vertical ellipsis (⋮) icon.
+        
+- **Goal Completion & Summary:**
+    
+    - A new "Goal Complete!" modal is now triggered when a goal's progress reaches 100%.
+        
+    - This modal presents a summary of the achievement, including **Goal Name, Final Amount, Total Contributions, and Average Contribution Amount.**
+        
+- **Goal Personalization:**
+    
+    - **Icons:** Users can now select from a curated list of 10 emojis to visually represent their goal.
+        
+    - **Type:** A "Goal Type" field (Short-Term, Long-Term, Custom) has been added to the creation modal for better user categorization.
+        
+- **Educational "Strategy Guide":**
+    
+    - An info-panel has been added to the Splitter page, providing educational blurbs on the philosophy and ideal user for each investment strategy (Classic, Balanced, Growth).
+        
+
+---
+
+#### **3.0 🔄 Changes & Improvements**
+
+- **Architectural Overhaul: "Goals-First" User Journey:**
+    
+    - The application's entry point has been refactored from the "Splitter" page to the "Your Goals" dashboard. This aligns the user experience with establishing motivation before taking action.
+        
+- **Refactoring of "The Foundry":**
+    
+    - The Foundry has been architecturally redefined. It is no longer a standard goal entity but a distinct treasury entity.
+        
+    - The core application logic now follows a Splitter -> Foundry -> Goal data flow, where the Foundry acts as a mandatory staging area for all funds before deployment.
+        
+- **Splitter Page Mechanics:**
+    
+    - The primary "Send to Foundry" button has been deprecated.
+        
+    - Functionality has been replaced with granular, per-category icon buttons (🏛️), allowing users to send specific amounts from Cash, Savings, or Investments to the Foundry individually.
+        
+    - The "Cash Only" strategy has been removed to simplify the user choice.
+        
+- **Freemium Logic Implementation:**
+    
+    - A business rule has been implemented to cap the Foundry balance at **£10,000** for free-tier users.
+        
+    - An upsell modal is now triggered if a user action would exceed this limit.
+        
+    - All premium features are now clearly marked with an "Upgrade (Coming Soon)" state.
+        
+- **Strategy Calculation Updates:**
+    
+    - The percentage splits for investment strategies have been updated to:
+        
+        - **Balanced:** 45% Cash / 30% Savings / 25% Investment.
+            
+        - **Growth:** 20% Cash / 30% Savings / 50% Investment.
+            
+
+---
+
+#### **4.0 🐛 Bug Fixes**
+
+- **FIXED:** Preset "Target Amount" buttons in the "Create Goal" modal now correctly populate the input field when clicked.
+    
+- **FIXED:** Resolved a state management bug where the Foundry balance on the dashboard would not update in real-time after a successful transfer from the Splitter.
+    
+- **FIXED:** Replaced all native browser alert() calls with a custom, on-brand modal for a consistent user experience.
+    
+- **FIXED:** Corrected multiple low-contrast UI elements in dark mode, specifically in the "Choose Your Goal" modal, the "Strategy Guide," and modal close icons, to improve accessibility and visual polish.
+    
+- **FIXED:** Corrected inaccurate "excess funds" copy in the Foundry modal to "funds" to align with its new role as a primary treasury.
+  
