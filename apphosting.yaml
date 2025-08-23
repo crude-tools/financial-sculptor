@@ -1,0 +1,3 @@
+run:
+  command: 'echo "Static site, no server needed"'
+publicDir: public
