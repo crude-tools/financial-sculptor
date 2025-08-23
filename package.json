@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "serve -s public"
+    "start": "serve -s public -l $PORT"
   },
-  "dependencies": {
+  "devDependencies": {
     "serve": "^14.2.3"
   }
 }
