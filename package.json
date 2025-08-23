@@ -1,8 +1,11 @@
 {
   "name": "financial-sculptor-static",
   "version": "1.0.0",
-  "private": true
+  "private": true,
   "scripts": {
     "start": "serve -s public"
+  },
+  "dependencies": {
+    "serve": "^14.2.3"
   }
 }
